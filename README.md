@@ -15,14 +15,6 @@ The Bakery is a fictional B2C ecommerce website that specializes in selling home
 
 ### User Stories
 
-Developer:
-
-- As a developer I want to ensure sensitive information is stored safely.
-- As a developer I want to create models for the functionality of the site, and to ensure data gets saved correctly to the database.
-- As a developer I want to create a base template including navbar and footer for other pages to inherit from.
-- As a developer I want to deploy the site to heroku so others can use the site
-- As a developer I want to complete a README.
-
 Site Owner:
 
 - As a Site Owner I want to sell baked goods online.
@@ -54,12 +46,18 @@ Site User:
 - As a Site User I want to securely save my card details for future use.
 - As a Site User I want to be able to edit or delete my personal details.
 - As a Site User I want to be able to reset my password should I forget it.
+- As a Site User I want to be able to raise any issues I have with my orders.
+- As a Site User I want to be able to add comments about products.
+- As a Site User I want to be able to delete my comments.
+- As a Site User I want to be able to edit my comments.
+- As a Site User I want to be able to delete my account.
+- As a Site User I want to be able to delete my ratings.
 
 ## Design
 
 ### ERD
 
-![ERD LucidChart](./documents/images/design/The-Bakery-ERD.png)
+![ERD LucidChart](./documents/images/design/erd.png)
 
 ### Wireframes
 
@@ -70,6 +68,10 @@ Site User:
 - Products Detail Wireframe
 
 ![Products Detail Page Wireframe](./documents/images/design/product_detail_page.PNG)
+
+- Products Detail Ratings and Comments Section
+
+![Products Detail Ratings and Comments View](./documents/images/design/product_detail_rating_comment_view.PNG)
 
 - Checkout Wireframe
 
