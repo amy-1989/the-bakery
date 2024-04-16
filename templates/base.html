@@ -14,6 +14,12 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
 
+    <!--Google Fonts CSS-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Roboto+Slab:wght@100..900&display=swap"
+        rel="stylesheet">
+
     <!-- Font Awesome CSS-->
     <script src="https://kit.fontawesome.com/41aa291a02.js" crossorigin="anonymous"></script>
 
@@ -28,7 +34,7 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
-                <a class="navbar-brand logo" href="#"><img src="/static/images/bakery_logo.png" alt="logo" height="80"
+                <a class="navbar-brand" href="#"><img src="/static/images/bakery_logo.png" alt="logo" height="80"
                         width="80"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -57,18 +63,27 @@
                                 <li><a class="dropdown-item" href="#">Sign Out</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Register</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Shop
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#">Whole Cakes</a></li>
+                                <li><a class="dropdown-item" href="#">Cupcakes</a></li>
+                                <li><a class="dropdown-item" href="#">Cake Slices</a></li>
+                            </ul>
                         </li>
                     </ul>
-                    <form class="d-flex">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
-                    <span><a href="#"><i class="fa-solid fa-bag-shopping"></i></a></span>
+                    <span><a href="#" class="shopBag"><i class="fa-solid fa-bag-shopping"></i></a></span>
                 </div>
             </div>
         </nav>
+        <form class="d-flex  
+        offset-md-4 col-md-4 mb-2 mt-2">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-dark" type="submit">Search</button>
+        </form>
     </header>
     <main>
         {% block content %}
@@ -76,15 +91,33 @@
     </main>
     <footer>
         <div class="row">
-            <div class="col">
-                <!--social links-->
+            <div class="col d-flex  
+            align-items-center  
+            justify-content-center">
+                <!--Address-->
                 <ul>
-                    <li><a href="#">Facebook</a></li>
-                    <li><a href="#">Twitter</a></li>
-                    <li><a href="#">Instagram</a></li>
+                    <li>25 Cupcake Row</li>
+                    <li>Dublin</li>
+                    <li>Ireland</li>
+                    <li>01-111222</li>
                 </ul>
             </div>
-            <div class="col">
+            <div class="col d-flex  
+            align-items-center  
+            justify-content-center">
+                <!--social links-->
+                <ul>
+                    <li class="d-inline p-2 socialLinks"><a href="#"><i class="fa-brands fa-square-facebook"></i></a>
+                    </li>
+                    <li class="d-inline p-2 socialLinks"><a href="#"><i class="fa-brands fa-square-x-twitter"></i></a>
+                    </li>
+                    <li class="d-inline p-2 socialLinks"><a href="#"><i class="fa-brands fa-square-instagram"></i></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col d-flex  
+            align-items-center  
+            justify-content-center">
                 <!--other links-->
                 <ul>
                     <li><a href="#">Contact Us</a></li>

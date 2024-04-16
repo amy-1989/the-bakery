@@ -1,4 +1,62 @@
-body {
-    background-color: rgb(165, 221, 243);
+html {
+    overflow-x: hidden;
 }
 
+body{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Roboto-Slab', sans-serif;
+}
+
+footer {
+    background-color: rgb(165, 221, 243);
+    margin-top: auto;
+    font-family: 'Roboto-Slab', sans-serif;
+}
+
+footer li {
+    list-style-type: none;
+}
+
+.slider {
+    width: fit-content;
+}
+
+#carouselExampleControls .carousel-item img {  
+    object-fit: cover;
+    object-position: center;
+    overflow: hidden;
+    height:80vh;
+    width: 50vw;
+  }
+  
+.carousel-caption {
+    background-color: rgba(238, 176, 247, 0.719);
+}
+
+a {
+    text-decoration: none;
+    color: rgb(47, 57, 61);
+}
+
+a:hover {
+    color:rgb(94, 125, 136);
+ }
+
+.carousel-caption h5 {
+    font-size: 3rem;
+}
+
+.shopLink:hover {
+    color:rgb(94, 125, 136);
+ }
+
+.socialLinks {
+    font-size: 3rem;
+}
+
+.shopBag {
+    font-size: 2rem;
+    margin-right: 4rem;
+}
