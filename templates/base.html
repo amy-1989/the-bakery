@@ -36,7 +36,7 @@
             <div class="container-fluid">
                 <a class="navbar-brand" href="#"><img src="/static/images/bakery_logo.png" alt="logo" height="80"
                         width="80"></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                <button class="navbar-toggler  order-first" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -75,15 +75,18 @@
                             </ul>
                         </li>
                     </ul>
-                    <span><a href="#" class="shopBag"><i class="fa-solid fa-bag-shopping"></i></a></span>
                 </div>
+                <span class="order-last d-flex"><a href="#" class="shopBag align-items-right"><i
+                            class="fa-solid fa-bag-shopping"></i></a></span>
             </div>
         </nav>
-        <form class="d-flex  
-        offset-md-4 col-md-4 mb-2 mt-2">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-dark" type="submit">Search</button>
-        </form>
+        <div class="m-4">
+            <form class="d-flex  
+            offset-md-4 col-md-4 mb-2 mt-2">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-dark" type="submit">Search</button>
+            </form>
+        </div>
     </header>
     <main>
         {% block content %}
@@ -91,22 +94,22 @@
     </main>
     <footer>
         <div class="row">
-            <div class="col d-flex  
+            <div class="col-md-4 d-flex  
             align-items-center  
             justify-content-center">
                 <!--Address-->
-                <ul>
+                <ul class="p-0">
                     <li>25 Cupcake Row</li>
                     <li>Dublin</li>
                     <li>Ireland</li>
                     <li>01-111222</li>
                 </ul>
             </div>
-            <div class="col d-flex  
+            <div class="col-md-4 d-flex  
             align-items-center  
             justify-content-center">
                 <!--social links-->
-                <ul>
+                <ul class="p-0">
                     <li class="d-inline p-2 socialLinks"><a href="#"><i class="fa-brands fa-square-facebook"></i></a>
                     </li>
                     <li class="d-inline p-2 socialLinks"><a href="#"><i class="fa-brands fa-square-x-twitter"></i></a>
@@ -115,11 +118,11 @@
                     </li>
                 </ul>
             </div>
-            <div class="col d-flex  
+            <div class="col-md-4 d-flex  
             align-items-center  
             justify-content-center">
                 <!--other links-->
-                <ul>
+                <ul class="p-0">
                     <li><a href="#">Contact Us</a></li>
                     <li><a href="#">FAQ</a></li>
                     <li><a href="#">Privacy Policy</a></li>
