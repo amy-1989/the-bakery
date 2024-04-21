@@ -34,8 +34,8 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
-                <a class="navbar-brand" href="../home/templates/home/index.html"><img src="/static/images/bakery_logo.png" alt="logo" height="80"
-                        width="80"></a>
+                <a class="navbar-brand" href="../home/templates/home/index.html"><img
+                        src="/static/images/bakery_logo.png" alt="logo" height="80" width="80"></a>
                 <button class="navbar-toggler  order-first" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -80,10 +80,29 @@
                         </li>
                     </ul>
                 </div>
+                <!--Shopping Bag-->
                 <span class="order-last d-flex"><a href="#" class="shopBag align-items-right"><i
                             class="fa-solid fa-bag-shopping"></i></a></span>
+                <!--End of Shopping Bag-->
             </div>
         </nav>
+        <!-- Django Messages Container -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    {% for message in messages %}
+                    <div class="alert {{ message.tags }} alert-dismissible
+                fade show" id="msg" role="alert">
+                        {{ message | safe }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <!--End of Messages Container-->
+
+        <!--Search Bar-->
         <div class="m-4">
             <form class="d-flex  
             offset-md-4 col-md-4 mb-2 mt-2">
@@ -91,6 +110,7 @@
                 <button class="btn btn-outline-dark" type="submit">Search</button>
             </form>
         </div>
+        <!--End of Search Bar-->
     </header>
     <main>
         {% block content %}
