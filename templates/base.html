@@ -109,8 +109,8 @@
         <!--Search Bar-->
         <div class="m-4">
             <form class="d-flex  
-            offset-md-4 col-md-4 mb-2 mt-2">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            offset-md-4 col-md-4 mb-2 mt-2" method="GET" action="{% url 'products' %}">
+                <input class="form-control me-2" type="text" name="q" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-dark" type="submit">Search</button>
             </form>
         </div>
