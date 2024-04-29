@@ -75,9 +75,12 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="{% url 'products' %}">All Products</a></li>
-                                <li><a class="dropdown-item" href="#">Whole Cakes</a></li>
-                                <li><a class="dropdown-item" href="#">Cupcakes</a></li>
-                                <li><a class="dropdown-item" href="#">Cake Slices</a></li>
+                                <li><a class="dropdown-item" href="{% url 'products' %}?category=Whole%20Cakes">Whole
+                                        Cakes</a></li>
+                                <li><a class="dropdown-item" href="{% url 'products' %}?category=Cupcakes">Cupcakes</a>
+                                </li>
+                                <li><a class="dropdown-item" href="{% url 'products' %}?category=Cake%20Slices">Cake
+                                        Slices</a></li>
                             </ul>
                         </li>
                     </ul>
