@@ -30,7 +30,9 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
     <!--JQuery-->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    </script>
 </head>
 
 <body>
@@ -89,8 +91,23 @@
                     </ul>
                 </div>
                 <!--Shopping Bag-->
-                <span class="order-last d-flex"><a href="#" class="shopBag align-items-right"><i
-                            class="fa-solid fa-bag-shopping"></i></a></span>
+                <span class="order-last d-flex mt-2 align-items-center">
+                    <ul class="bag">
+                        <li class="text-center">
+                            <a href="{% url 'bag' %}" class="shopBag"><i class="fa-solid fa-bag-shopping"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <p class="my-0">
+                                {% if grand_total %}
+                                ${{ grand_total|floatformat:2 }}
+                                {% else %}
+                                $0.00
+                                {% endif %}
+                            </p>
+                        </li>
+                    </ul>
+                </span>
                 <!--End of Shopping Bag-->
             </div>
         </nav>

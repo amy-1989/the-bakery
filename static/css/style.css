@@ -56,12 +56,15 @@ a:hover {
 
 .shopBag {
     font-size: 2rem;
-    margin-right: 2rem;
 }
 
 .allauthLinks {
     text-decoration: underline;
     color: rgb(6, 175, 241);
+}
+
+.bag {
+    list-style-type: none;
 }
 
 @media only screen and (min-width: 768px) {
