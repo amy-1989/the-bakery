@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
 
 
 def bag(request):
@@ -20,6 +21,6 @@ def add_to_bag(request, item_id):
         bag[item_id] = quantity
 
     request.session['bag'] = bag
-    print(request.session['bag'])
+    messages.success(request,"Item added to bag")
     return redirect(redirect_url)
 
