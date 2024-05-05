@@ -73,6 +73,9 @@ a:hover {
 
 }
 
+.remove-item {
+    cursor: pointer;
+}
 
 @media only screen and (min-width: 768px) {
     #carouselControls .carousel-item img {
