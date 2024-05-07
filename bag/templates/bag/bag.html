@@ -5,7 +5,7 @@
 
 
 {% block content %}
-<div class="container-fluid mb-3">
+<div class="mb-3">
     <div class="row">
         <div class="col text-center my-3">
             <h2>Shopping Bag</h2>
@@ -13,7 +13,7 @@
     </div>
     <div class="row">
         <div class="col d-flex justify-content-center">
-            <div class="card w-75 shadow p-3 bg-white rounded">
+            <div class="card w-75 shadow p-3 bg-white rounded checkoutCard">
                 <div class="row">
                     <div class="col text-center">
                         {% if bag_items %}
@@ -25,7 +25,7 @@
                                         <th scope="col">Product Info</th>
                                         <th scope="col">Price</th>
                                         <th scope="col">Qty</th>
-                                        <th scope="col">Subtotal</th>
+                                        <th scope="col">Total</th>
                                     </tr>
                                 </thead>
 
@@ -72,9 +72,9 @@
                                 {% endfor %}
                                 <tr>
                                     <td colspan="5" class="pt-5 text-right">
-                                        <h6><strong>Bag Total: €{{ total|floatformat:2 }}</strong></h6>
+                                        <h6><strong>SubTotal: €{{ total|floatformat:2 }}</strong></h6>
                                         <h6>Delivery: €{{ delivery|floatformat:2 }}</h6>
-                                        <h5 class="mt-4"><strong>Grand Total: €{{ grand_total|floatformat:2 }}</strong>
+                                        <h5 class="mt-4"><strong>Order Total: €{{ grand_total|floatformat:2 }}</strong>
                                         </h5>
                                         {% if free_delivery_delta > 0 %}
                                         <p class="mb-1 text-danger">
