@@ -81,6 +81,11 @@ a:hover {
     margin-top: 3rem;
 }
 
+.quantityHeader {
+    text-align: center !important;
+}
+
+
 @media only screen and (min-width: 768px) {
     #carouselControls .carousel-item img {
         object-fit: cover;
@@ -98,6 +103,10 @@ a:hover {
 
     .checkoutCard {
         width: 90vw !important;
+    }
+
+    .quantityForm {
+        justify-content: left !important;
     }
 }
 

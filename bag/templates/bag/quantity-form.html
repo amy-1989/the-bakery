@@ -1,0 +1,22 @@
+<p class="d-block d-md-none"><strong>Quantity:</strong></p>
+<form class="form update-form" action=" {% url 'update_bag' item.item_id %}" method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+        <div class="col-12 d-flex justify-content-center quantityForm">
+            <span class="mt-1 ml-2">
+                <input class="form-control qty_input" type="number"
+                    name="quantity" value="{{ item.quantity }}" min="1" max="99"
+                    data-item_id="{{ item.item_id }}"
+                    id="id_qty_{{ item.item_id }}">
+                <a class="remove-item text-danger"
+                    id="remove_{{ item.item_id }}"><small><i
+                            class="fa-solid fa-xmark"></i> Remove</small></a>
+            </span>
+        </div>
+        <div class="col-12 d-flex justify-content-center quantityForm">
+            <input type="submit"
+                class=" update-link btn btn-secondary rounded-0 mt-3"
+                value="Update">
+        </div>
+    </div>
+</form>
