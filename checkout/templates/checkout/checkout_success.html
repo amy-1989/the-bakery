@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+
+{% block content %}
+<div class="container-fluid mb-3">
+    <div class="row">
+        <div class="col text-center my-3">
+            <h2>Thank You!</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col d-flex justify-content-center">
+            <div class="card w-75 shadow p-3 bg-white rounded checkoutCard">
+                <div class="row">
+                    <div class="col text-center">
+                        <p>Your payment was successful. Please see yuor order information below. A confirmation email has been sent to <strong> {{order.email}}</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col d-flex justify-content-center">
+            <div class="card w-75 shadow p-3 bg-white rounded checkoutCard orderSum">
+                <div class="row">
+                    <div class="col text-center mb-3">
+                        <p class="text-muted">Order Summary </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
