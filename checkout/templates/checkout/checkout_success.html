@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% load crispy_forms_tags %}
-
+{% load bag_tools %}
 
 
 {% block content %}
@@ -16,7 +16,8 @@
             <div class="card w-75 shadow p-3 bg-white rounded checkoutCard">
                 <div class="row">
                     <div class="col text-center">
-                        <p>Your payment was successful. Please see yuor order information below. A confirmation email has been sent to <strong> {{order.email}}</strong></p>
+                        <p>Your payment was successful. Your Order Number is {{ order.order_number }}. An order
+                            confirmation email has been sent to <strong> {{order.email}}</strong></p>
                     </div>
                 </div>
             </div>
@@ -24,12 +25,77 @@
     </div>
     <div class="row">
         <div class="col d-flex justify-content-center">
-            <div class="card w-75 shadow p-3 bg-white rounded checkoutCard orderSum">
+            <div class="card w-75 shadow p-3 bg-white rounded checkoutCard orderSum mb-3">
                 <div class="row">
                     <div class="col text-center mb-3">
-                        <p class="text-muted">Order Summary </p>
+                        <p class="text-muted heading pb-3">Order Details</p>
+                        <div class="row">
+                            <div class="col-7 offset-2">
+                                <p class="mb-2 mt-0 small text-muted">Items</p>
+                            </div>
+                            <div class="col-3 text-right">
+                                <p class="mb-2 mt-0 small text-muted">Total</p>
+                            </div>
+                        </div>
+                        {% for item in order.lineitems.all %}
+                        <hr class="my-0 pb-2">
+                        <div class="row">
+                            <div class="col-2 mb-3">
+                                <a href="{% url 'product_detail' item.product.id %}">
+                                    {% if item.product.image %}
+                                    <img class="w-100" src="{{ item.product.image.url }}" alt="{{ product.name }}">
+                                    {% else %}
+                                    <img class="w-100" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
+                                    {% endif %}
+                                </a>
+                            </div>
+                            <div class="col-7 mb-3">
+                                <p class="my-0"><strong>{{ item.product.name }}</strong></p>
+                                <p class="my-0 small text-muted">Qty: {{ item.quantity }}</p>
+                            </div>
+                            <div class="col-3">
+                                <p class="my-0 small text-muted">
+                                    €{{ item.product.price | calc_subtotal:item.quantity }}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        <hr class="my-0">
+                    </div>
+                    <div class="row">
+                        <div class="col-7 offset-5 checkoutSuccess">
+                            <p class="my-0 ">SubTotal: €{{ order.order_total }}</p>
+                            <p class="my-0 ">Delivery: €{{ order.delivery_cost }}</p>
+                            <p class="my-0 ">Order Total: €{{ order.grand_total }}</p>
+                        </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col d-flex justify-content-center">
+            <div class="card w-75 shadow p-3 bg-white rounded checkoutCard my-3">
+                <div class="col text-center mb-3">
+                    <p class="text-muted heading">Delivery Details</p>
+                </div>
+                    <div class="row">
+                        <div class="col-7 offset-5 checkoutSuccess">
+                            <p class="my-0">Full Name: {{ order.full_name }}</p>
+                            <p class="my-0">Address 1: {{ order.street_address1 }}</p>
+                            {% if order.street_address2 %}
+                            <p class="my-0">Address 2: {{ order.street_address2 }}</p>
+                            {% endif %}
+                            {% if order.county %}
+                            <p class="my-0">County: {{ order.county }}</p>
+                            {% endif %}
+                            <p class="my-0">Town or City: {{ order.town_or_city }}</p>
+                            {% if order.postcode %}
+                            <p class="my-0">Postcode: {{ order.postcode }}</p>
+                            {% endif %}
+                            <p class="my-0">Country: {{ order.country }}</p>
+                            <p class="my-0">Phone Number: {{ order.phone_number }}</p>
+                        </div>
+                    </div>
             </div>
         </div>
     </div>
