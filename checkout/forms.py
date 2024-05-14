@@ -29,6 +29,7 @@ class OrderForm(forms.ModelForm):
         }
 
         self.fields['full_name'].widget.attrs['autofocus'] = True
+        self.fields['country'].widget.attrs['class'] = 'stripe-style-input'
         for field in self.fields:
             if self.fields[field].required:
                 placeholder = f'{placeholders[field]} *'
