@@ -95,7 +95,7 @@ a:hover {
   box-sizing: border-box;
   height: 40px;
   padding: 10px 12px;
-  border: 1px solid transparent;
+  border: 1px solid black;
   border-radius: 0px;
   background-color: white;
   box-shadow: 0 1px 3px 0 #e6ebf1;
@@ -149,6 +149,21 @@ a:hover {
 .formBoxes {
     border-color: black;
 }
+
+label {
+    margin-top: .7rem;
+    margin-left: 2rem;
+    float: left;
+}
+
+.form-check-input[type=checkbox] {
+     border-radius: 0 !important;  
+}
+
+.form-check .form-check-input {
+    width: 40px;
+}
+
 @media only screen and (min-width: 768px) {
     #carouselControls .carousel-item img {
         object-fit: cover;
