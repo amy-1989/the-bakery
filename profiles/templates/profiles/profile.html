@@ -11,6 +11,7 @@
             <h2>Profile</h2>
         </div>
     </div>
+    <!--Update Delivery Form-->
     <div class="row">
         <div class="col d-flex justify-content-center">
             <div class="card w-75 shadow p-3 bg-white rounded checkoutCard">
@@ -24,14 +25,75 @@
                         </form>
                     </div>
                 </div>
+                <!--To display saved addresses-->
+                {% for addresses in useraddress %}
+                <div class="row">
+                    <div class="col text-center mb-3">
+                        {% if addresses.is_primary %}
+                        <p class="text-muted">This is the primary address</p>
+                        {% endif %}
+                        {% if addresses.street_address1 %}
+                        <p class="my-0">Address 1: {{ addresses.street_address1 }}</p>
+                        {% endif %}
+                        {% if addresses.street_address2 %}
+                        <p class="my-0">Address 2: {{ addresses.street_address2 }}</p>
+                        {% endif %}
+                        {% if addresses.county %}
+                        <p class="my-0">County: {{ addresses.county }}</p>
+                        {% endif %}
+                        <p class="my-0">Town or City: {{ addresses.town_or_city }}</p>
+                        {% if addresses.postcode %}
+                        <p class="my-0">Postcode: {{ addresses.postcode }}</p>
+                        {% endif %}
+                        {% if addresses.country %}
+                        <p class="my-0">Country: {{ addresses.country }}</p>
+                        {% endif %}                        
+                    </div>
+                </div>
+                {% endfor %}
             </div>
         </div>
+        <!-- to display order history-->
         <div class="col d-flex justify-content-center">
             <div class="card w-75 shadow p-3 bg-white rounded checkoutCard">
                 <div class="row">
                     <div class="col text-center mb-3">
                         <p class="text-muted">Order History</p>
-                            {{ orders }}
+                        <div class="order-history table-responsive">
+                            <table class="table table-sm table-borderless">
+                                <thead>
+                                    <tr>
+                                        <th>Order Number</th>
+                                        <th>Date</th>
+                                        <th>Items</th>
+                                        <th>Order Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for order in orders %}
+                                        <tr>
+                                            <td>
+                                                <a href="{% url 'order_history' order.order_number %}"
+                                                title="{{ order.order_number }}">
+                                                    {{ order.order_number|truncatechars:6 }}
+                                                </a>
+                                            </td>
+                                            <td>{{ order.date }}</td>
+                                            <td>
+                                                <ul class="list-unstyled">
+                                                    {% for item in order.lineitems.all %}
+                                                        <li class="small">                                                   
+                                                            {{ item.product.name }} x{{ item.quantity }}
+                                                        </li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </td>
+                                            <td>€{{ order.grand_total }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
 
                     </div>
                 </div>

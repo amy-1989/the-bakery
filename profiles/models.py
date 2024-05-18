@@ -47,17 +47,6 @@ class UserAddress(models.Model):
     county = models.CharField(max_length=80, null=True, blank=True)
     is_primary = models.BooleanField(null=False)
 
-    def save(self, *args, **kwargs):
-        if self.is_primary:
-            self.__class__._default_manager.filter(customer=self.user, is_primary=True).update(is_primary=False)
-        super().save(*args, **kwargs)
-    
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(
-                fields=['user'],
-                condition=Q(is_primary=True),
-                name='unique_primary_per_user'
-            )
-        ]
+   
+   
 
