@@ -1,14 +1,14 @@
 from django import forms
-from .models import UserProfile, UserAddress
+from .models import UserAddress
 
 
-class ProfilesForm(forms.ModelForm):
+class AddressForm(forms.ModelForm):
     class Meta:
         model = UserAddress
-        fields = ( 'phone_number',
+        fields = ('phone_number',
                   'street_address1', 'street_address2',
-                  'town_or_city', 'postcode', 
-                  'county', 'country', 'is_primary')
+                  'town_or_city', 'county', 'postcode', 'country',
+                   'is_primary',)
 
     def __init__(self, *args, **kwargs):
         """

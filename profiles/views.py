@@ -1,7 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 
 from .models import UserProfile, UserAddress
-from .forms import ProfilesForm
+from checkout.models import Order
+from .forms import AddressForm
 from django.contrib import messages
 
 
@@ -10,12 +11,12 @@ def profile(request):
     profile = get_object_or_404(UserProfile, user=request.user)
 
     if request.method == 'POST':
-        form = ProfilesForm(request.POST, instance=profile)
+        form = AddressForm(request.POST, instance=profile)
         if form.is_valid():
             form.save()
             messages.success(request, 'Profile updated successfully')
 
-    form = ProfilesForm(instance=profile)
+    form = AddressForm(instance=profile)
     orders = profile.orders.all()
 
     template = 'profiles/profile.html'

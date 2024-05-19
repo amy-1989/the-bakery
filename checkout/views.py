@@ -6,7 +6,7 @@ from django.conf import settings
 from .forms import OrderForm
 from .models import Order, OrderLineItem
 from products.models import Product
-from profiles.forms import ProfilesForm
+from profiles.forms import AddressForm
 from profiles.models import UserProfile, UserAddress
 from bag.contexts import bag_contents
 
@@ -99,16 +99,15 @@ def checkout(request):
         if request.user.is_authenticated:
        #     try:
        #         profile = UserProfile.objects.get(user=request.user)
-        #         address = UserAddress.objects.all()
          #       order_form = OrderForm(initial={
           #          'full_name': profile.user.get_full_name(),
            #         'email': profile.user.email,
-            #        'country': address.country,
-             #       'postcode': address.postcode,
-              #      'town_or_city': address.town_or_city,
-               #     'street_address1': address.street_address1,
-                #    'street_address2': address.street_address2,
-                 #   'county': address.county,
+            #        'country': profile.country,
+             #       'postcode': profile.postcode,
+              #      'town_or_city': profile.town_or_city,
+               #     'street_address1': profile.street_address1,
+                #    'street_address2': profile.street_address2,
+                 #   'county': profile.county,
                # })
            # except UserProfile.DoesNotExist:
                order_form = OrderForm()
