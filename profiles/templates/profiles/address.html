@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+
+{% block content %}
+
+<div class="container-fluid mb-3">
+    <div class="row">
+        <div class="col text-center my-5">
+            <h2> Saved Delivery Addresses</h2>
+        </div>
+    </div>
+    <div class="row">
+        {% for address in user_address %}       
+        <div class="col-md-4 mb-5 d-flex justify-content-center">
+            <div class="card w-75 shadow p-3 bg-white rounded checkoutCard">
+                <div class="row">
+                    <div class="col text-center mb-3">
+                        <p> Street Address 1: {{ address.street_address1 }} </p>
+                        <p> Street Address 2: {{ address.street_address2 }} </p>
+                        <p> Town or City: {{ address.town_or_city }} </p>
+                        <p> County: {{ address.county }} </p>
+                        <p> Postcode: {{ address.postcode }} </p>
+                        <p> Country: {{ address.country }} </p> 
+                        {% if address.is_primary %}
+                        <p><small>This is your primary address </small><i class="fa-solid fa-key"></i></p> 
+                        {% else %}
+                        <form class="mt-3" action="{% url 'profile_address' %}" method="POST" id="primary-update-form">
+                            {% csrf_token %}
+                            {{form|crispy }}
+                            <button class="btn btn-secondary rounded-0 mt-5" type="submit">Make Primary Address
+                            </button>
+                        </form>
+                        {% endif %}
+                        <button class="btn btn-secondary">Update Address</button>
+                        <button class="btn btn-secondary">Delete Address</button>             
+                    </div>
+                </div>
+            </div>          
+        </div>
+    {% if forloop.counter|divisibleby:3 %}
+    </div>
+    <div class="row">
+    {% endif %}
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}

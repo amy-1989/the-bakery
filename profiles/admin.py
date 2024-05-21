@@ -15,5 +15,6 @@ class UserProfileAdmin(admin.ModelAdmin):
     readonly_fields = ('user', 'created_on', 
     'updated_on',)
 
-admin.site.register(UserProfile, UserProfileAdmin)
+admin.site.register(UserProfile, UserProfileAdmin,)
+admin.site.register(UserAddress)
 

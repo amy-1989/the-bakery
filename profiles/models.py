@@ -12,7 +12,7 @@ class UserProfile(models.Model):
     A user profile model for maintaining default
     delivery information and order history
     """
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
     
@@ -37,9 +37,11 @@ class UserAddress(models.Model):
     A model for maintaining user
     delivery addresses
     """
-    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='addresses')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name='user')
+    profile = models.ForeignKey(UserProfile, default='', on_delete=models.CASCADE,
+                                 null=True, blank=True, related_name='address')
     phone_number = models.CharField(max_length=20, null=True, blank=True)
-    country = CountryField(blank_label='Country *', null=True, blank=True)
+    country = CountryField(blank_label='Country', null=True, blank=True)
     postcode = models.CharField(max_length=20, null=True, blank=True)
     town_or_city = models.CharField(max_length=40, null=True, blank=True)
     street_address1 = models.CharField(max_length=80, null=True, blank=True)
