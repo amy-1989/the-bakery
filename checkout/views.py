@@ -95,21 +95,30 @@ def checkout(request):
             amount=stripe_total,
             currency=settings.STRIPE_CURRENCY,
         )
-#error 
+
         if request.user.is_authenticated:
-       #     try:
-       #         profile = UserProfile.objects.get(user=request.user)
-         #       order_form = OrderForm(initial={
-          #          'full_name': profile.user.get_full_name(),
-           #         'email': profile.user.email,
-            #        'country': profile.country,
-             #       'postcode': profile.postcode,
-              #      'town_or_city': profile.town_or_city,
-               #     'street_address1': profile.street_address1,
-                #    'street_address2': profile.street_address2,
-                 #   'county': profile.county,
-               # })
-           # except UserProfile.DoesNotExist:
+            try:
+                profile = UserProfile.objects.get(user=request.user)
+                address = UserAddress.objects.filter(profile=profile, is_primary=True).first()              
+    
+                print(address)
+                    
+                order_form = OrderForm(initial={
+                    'full_name': profile.user.get_full_name(),
+                    'email': profile.user.email,
+                    'country': address.country,
+                    'postcode': address.postcode,
+                    'town_or_city': address.town_or_city,
+                    'street_address1': address.street_address1,
+                    'street_address2': address.street_address2,
+                    'county': address.county,
+                })
+
+                print(profile.user.email)
+                print(address.street_address1)
+                print(address.county)
+                print(address.country)
+            except UserProfile.DoesNotExist:
                order_form = OrderForm()
         else:
             order_form = OrderForm()
@@ -118,6 +127,7 @@ def checkout(request):
         messages.warning(request, 'Stripe public key is missing. \
             Did you forget to set it in your environment?')
 
+    order_form = OrderForm()
     template = 'checkout/checkout.html'
     context = {
         'order_form': order_form,
