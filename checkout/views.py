@@ -100,8 +100,6 @@ def checkout(request):
             try:
                 profile = UserProfile.objects.get(user=request.user)
                 address = UserAddress.objects.filter(profile=profile, is_primary=True).first()              
-    
-                print(address)
                     
                 order_form = OrderForm(initial={
                     'full_name': profile.user.get_full_name(),
@@ -114,10 +112,6 @@ def checkout(request):
                     'county': address.county,
                 })
 
-                print(profile.user.email)
-                print(address.street_address1)
-                print(address.county)
-                print(address.country)
             except UserProfile.DoesNotExist:
                order_form = OrderForm()
         else:
@@ -127,7 +121,7 @@ def checkout(request):
         messages.warning(request, 'Stripe public key is missing. \
             Did you forget to set it in your environment?')
 
-    order_form = OrderForm()
+   
     template = 'checkout/checkout.html'
     context = {
         'order_form': order_form,
