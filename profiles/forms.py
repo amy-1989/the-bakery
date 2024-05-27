@@ -29,18 +29,3 @@ class AddressForm(forms.ModelForm):
             self.fields[field].widget.attrs['class'] = 'stripe-style-input'
             self.fields[field].label = ''
             self.fields['is_primary'].label = 'Tick to set as primary address'
-
-class MakePrimaryForm(forms.ModelForm):
-    class Meta:
-        model = UserAddress
-        fields = ('is_primary',)
-    
-    def __init__(self, *args, **kwargs):
-        """
-        Add placeholders and classes, remove auto-generated
-        labels and set autofocus on first field
-        """
-        super().__init__(*args, **kwargs)       
-        
-        self.fields['is_primary'].widget.attrs['class'] = 'stripe-style-input'
-        self.fields['is_primary'].label = 'Tick to set as primary address'

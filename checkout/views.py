@@ -100,19 +100,24 @@ def checkout(request):
             try:
                 profile = UserProfile.objects.get(user=request.user)
                 address = UserAddress.objects.filter(profile=profile, is_primary=True).first()              
-                    
-                order_form = OrderForm(initial={
-                    'full_name': profile.user.get_full_name(),
-                    'email': profile.user.email,
-                    'country': address.country,
-                    'postcode': address.postcode,
-                    'town_or_city': address.town_or_city,
-                    'street_address1': address.street_address1,
-                    'street_address2': address.street_address2,
-                    'county': address.county,
-                })
+                try:
+
+                    order_form = OrderForm(initial={
+                        'full_name': profile.user.get_full_name(),
+                        'email': profile.user.email,
+                        'country': address.country,
+                        'postcode': address.postcode,
+                        'town_or_city': address.town_or_city,
+                        'street_address1': address.street_address1,
+                        'street_address2': address.street_address2,
+                        'county': address.county,
+                    })
+                except AttributeError:
+                    order_form = OrderForm()
 
             except UserProfile.DoesNotExist:
+               order_form = OrderForm()
+            except UserAddress.DoesNotExist:
                order_form = OrderForm()
         else:
             order_form = OrderForm()
@@ -140,6 +145,8 @@ def checkout_success(request, order_number):
     order = get_object_or_404(Order, order_number=order_number)
 
     profile = UserProfile.objects.get(user=request.user)
+    address = UserAddress.objects.filter(user=request.user, is_primary=True).first() 
+
     # Attach the user's profile to the order
     order.user_profile = profile
     order.save()
@@ -155,8 +162,10 @@ def checkout_success(request, order_number):
             'street_address2': order.street_address2,
             'county': order.county,
         }
-        user_profile_form = ProfilesForm(profile_data, instance=profile)
+        
+        user_profile_form = AddressForm(profile_data, instance=address)
         if user_profile_form.is_valid():
+            address.is_primary=True
             user_profile_form.save()
 
     messages.success(request, f'Order successfully processed! \

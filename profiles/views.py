@@ -1,8 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect, reverse
 
 from .models import UserProfile, UserAddress
 from checkout.models import Order
-from .forms import AddressForm, MakePrimaryForm
+from .forms import AddressForm
 from django.contrib import messages
 
 
@@ -57,26 +57,21 @@ def address(request):
 
     profile = get_object_or_404(UserProfile, user=request.user)
     user_address = profile.address.all() 
-    
-    if request.method == 'POST':
-        form = MakePrimaryForm(data = request.POST)
-
-        if form.is_valid():
-            primary = form.save(commit=False)
-            primary.user = request.user
-            primary.profile = profile
-            primary.save()
-            messages.success(request, 'Primary address updated successfully')
-    
-    form = MakePrimaryForm()
-    
+       
 
     template = 'profiles/address.html'
     context= {
         'user_address': user_address,
-        'form': form,
         'profile': profile,
     }
 
-
     return render(request, template, context)
+
+def set_primary_address(request, id):
+    """A view to allow users to change which address is their default address"""
+ 
+    UserAddress.objects.filter(user=request.user, is_primary=True).update(is_primary=False)
+    UserAddress.objects.filter(user=request.user, id=id).update(is_primary=True)
+    
+    return redirect (reverse('profile_address'))
+

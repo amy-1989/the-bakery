@@ -27,12 +27,7 @@
                         {% if address.is_primary %}
                         <p><small>This is your primary address </small><i class="fa-solid fa-key"></i></p> 
                         {% else %}
-                        <form class="mt-3" action="{% url 'profile_address' %}" method="POST" id="primary-update-form">
-                            {% csrf_token %}
-                            {{form|crispy }}
-                            <button class="btn btn-secondary rounded-0 mt-5" type="submit">Make Primary Address
-                            </button>
-                        </form>
+                        <a href = "{% url 'set_primary_address' address.id %}"> Make Primary Address</a>
                         {% endif %}
                         <button class="btn btn-secondary">Update Address</button>
                         <button class="btn btn-secondary">Delete Address</button>             
