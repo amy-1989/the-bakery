@@ -47,7 +47,7 @@ class UserAddress(models.Model):
     street_address1 = models.CharField(max_length=80, null=True, blank=True)
     street_address2 = models.CharField(max_length=80, null=True, blank=True)
     county = models.CharField(max_length=80, null=True, blank=True)
-    is_primary = models.BooleanField(null=False)
+    is_primary = models.BooleanField(null=True, blank=True)
 
    
    

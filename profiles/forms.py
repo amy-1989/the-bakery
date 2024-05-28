@@ -8,7 +8,7 @@ class AddressForm(forms.ModelForm):
         fields = ('phone_number',
                   'street_address1', 'street_address2',
                   'town_or_city', 'county', 'postcode', 'country',
-                   'is_primary',)
+                )
 
     def __init__(self, *args, **kwargs):
         """
@@ -28,4 +28,4 @@ class AddressForm(forms.ModelForm):
         for field in self.fields:
             self.fields[field].widget.attrs['class'] = 'stripe-style-input'
             self.fields[field].label = ''
-            self.fields['is_primary'].label = 'Tick to set as primary address'
+

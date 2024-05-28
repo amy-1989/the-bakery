@@ -5,7 +5,7 @@
 
 
 {% block content %}
-
+{% include "profiles/modal.html" %}
 <div class="container-fluid mb-3">
     <div class="row">
         <div class="col text-center my-5">
@@ -13,7 +13,7 @@
         </div>
     </div>
     <div class="row">
-        {% for address in user_address %}       
+        {% for address in user_address %}
         <div class="col-md-4 mb-5 d-flex justify-content-center">
             <div class="card w-75 shadow p-3 bg-white rounded checkoutCard">
                 <div class="row">
@@ -23,23 +23,28 @@
                         <p> Town or City: {{ address.town_or_city }} </p>
                         <p> County: {{ address.county }} </p>
                         <p> Postcode: {{ address.postcode }} </p>
-                        <p> Country: {{ address.country }} </p> 
+                        <p> Country: {{ address.country }} </p>
                         {% if address.is_primary %}
-                        <p><small>This is your primary address </small><i class="fa-solid fa-key"></i></p> 
+                        <p><small>This is your primary address </small><i class="fa-solid fa-key"></i></p>
                         {% else %}
-                        <a href = "{% url 'set_primary_address' address.id %}"> Make Primary Address</a>
+                        <a href="{% url 'set_primary_address' address.id %}"> <small>Make Primary Address</small></a>
                         {% endif %}
-                        <button class="btn btn-secondary">Update Address</button>
-                        <button class="btn btn-secondary">Delete Address</button>             
+                        <a href="{% url 'edit_address' address.id %}"> <small>Edit</small></a>
+                        <button class="btn address-delete" address_id="{{address.id}}" type="button">
+                            <small>Delete</small></button>
                     </div>
                 </div>
-            </div>          
+            </div>
         </div>
-    {% if forloop.counter|divisibleby:3 %}
+        {% if forloop.counter|divisibleby:3 %}
     </div>
     <div class="row">
-    {% endif %}
-    {% endfor %}
+        {% endif %}
+        {% endfor %}
     </div>
 </div>
+
+{% endblock %}
+{% block postloadjs %}
+<script src="{% static 'js/delete_address.js' %}"></script>
 {% endblock %}
