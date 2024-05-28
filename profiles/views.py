@@ -79,25 +79,34 @@ def set_primary_address(request, id):
     return redirect (reverse('profile_address'))
 
 
-def edit_address(request, id):
+def edit_address(request, id=None):
     """ a view to allow users to edit their saved addresses"""
+   
+    addresses = UserAddress.objects.all()
 
-    if request.method == "POST":
-        address = UserAddress.objects.get(id=id, user=request.user)
-        address_form = AddressForm(instance=address, data=request.POST)
+    if id:
+        address = get_object_or_404(UserAddress, id=id)
+        address_form = AddressForm(instance=address)
+    else:
+        address_form = AddressForm()
+
+    if request.method == 'POST':
+        if id:
+            address = get_object_or_404(UserAddress, id=id)
+            address_form = AddressForm(request.POST,
+                                       request.FILES, instance=address)
+        else:
+            address_form = AddressForm(request.POST, request.FILES)
         if address_form.is_valid():
             address_form.save()
-            return HttpResponseRedirect(reverse('profile_address'))
-    else:
-        address = UserAddress.objects.get(id=id, user=request.user)
-        address_form = AddressForm(instance=address)
-    
-    template = 'profiles/edit_address.html'
-    context = {
-        'address': address,
+            messages.success(request, "Address edited successfully!")
+        return HttpResponseRedirect('/')
+
+    return render(request, 'profiles/edit_address.html', {
+        'address': address if id else None,
         'address_form': address_form,
-    }
-    return render(request, template, context)
+        'addresses': addresses
+        })
 
 
 def delete_address(request, id):
