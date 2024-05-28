@@ -20,8 +20,12 @@
                         <form class="mt-3" action="" method="POST" id="address-update-form">
                             {% csrf_token %}
                             {{ address_form|crispy }}
+                            <a href="{% url 'profile_address' %}" class="btn btn-secondary rounded-0 mt-5"><i
+                                    class="fa-solid fa-angles-left"></i> Back to Addresses
+                            </a>
                             <button class="btn btn-secondary rounded-0 mt-5" type="submit">Save Changes
                             </button>
+
                         </form>
                     </div>
                 </div>
