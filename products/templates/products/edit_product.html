@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+<div class="container-fluid mb-3">
+    <div class="row">
+        <div class="col text-center my-3">
+            <h2>Product Management</h2>
+            <h3 class="text-muted">Edit a Product</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col d-flex justify-content-center">
+            <div class="card w-75 shadow p-3 bg-white rounded checkoutCard">
+                <div class="row">
+                    <div class="col text-center">
+                        <p>Please fill put the form below to complete your order</p>
+                        <form action="{% url 'edit_product' product.id %}" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ form | crispy }}
+                            <div class="text-right">
+                                <a class="btn btn-secondary" href="{% url 'products' %}">Cancel</a>
+                                <button class="btn btn-secondary" type="submit">Update Product</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
