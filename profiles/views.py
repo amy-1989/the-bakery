@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect, reverse, HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
 
 from .models import UserProfile, UserAddress
 from checkout.models import Order
@@ -6,6 +7,7 @@ from .forms import AddressForm
 from django.contrib import messages
 
 
+@login_required
 def profile(request):
     """ Display the user's profile. """
     profile = get_object_or_404(UserProfile, user=request.user)
@@ -55,7 +57,7 @@ def order_history(request, order_number):
 
     return render(request, template, context)
 
-
+@login_required
 def address(request):
     """ Display the user's saved addresses. """
 
@@ -71,7 +73,7 @@ def address(request):
 
     return render(request, template, context)
 
-
+@login_required
 def set_primary_address(request, id):
     """A view to allow users to change which address is their default address"""
  
@@ -80,7 +82,7 @@ def set_primary_address(request, id):
     
     return redirect (reverse('profile_address'))
 
-
+@login_required
 def edit_address(request, id=None):
     """ a view to allow users to edit their saved addresses"""
    
@@ -111,6 +113,7 @@ def edit_address(request, id=None):
         })
 
 
+@login_required
 def delete_address(request, id):
     """
     view to delete addresses
