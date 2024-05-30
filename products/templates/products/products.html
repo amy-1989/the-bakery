@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block content %}
+{% include "profiles/modal.html" %}
 <div class="container-fluid mb-3">
     <div class="row">
         <div class="col text-center my-3">
@@ -92,6 +93,13 @@
                                                         href="{% url 'products' %}?category={{ product.category }}"><i
                                                             class="fa-solid fa-tag"></i>{{ product.category }}</small></a>
                                                 {% endif %}
+                                                {% if request.user.is_superuser %}
+                                                <small class="ml-3">
+                                                    <a href="{% url 'edit_product' product.id %}">Edit</a> |
+                                                    <button class="btn product-delete" product_id="{{ product.id}}"
+                                                        type="button">Delete</button>
+                                                </small>
+                                                {% endif %}
                                             </div>
                                         </div>
                                     </div>
@@ -149,5 +157,5 @@
                 }
             })
         </script>
-
+        <script src="{% static 'js/delete_product.js' %}"></script>
         {% endblock %}

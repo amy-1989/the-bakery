@@ -16,7 +16,6 @@ const deleteAddressConfirm = document.getElementById("deleteConfirm");
 for (let button of deleteAddressButtons) {
   button.addEventListener("click", (e) => {
     let addressId = button.getAttribute("address_id");
-    console.log(addressId);
     document.getElementById("deleteModalLabel").innerHTML = "Delete Address?";
     document.getElementById("modalBodyContent").innerHTML = "Are you sure you want to delete your address? This action cannot be undone."
     deleteAddressConfirm.href = `address/delete/${addressId}`;
