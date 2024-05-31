@@ -23,7 +23,6 @@ class Product(models.Model):
     description = models.TextField()
     image = models.ImageField(null=True, blank=True)
     price = models.DecimalField(max_digits=6, decimal_places=2)
-    rating = models.ForeignKey('Rating', null=True, blank=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return self.name
@@ -31,10 +30,13 @@ class Product(models.Model):
 
 class Rating(models.Model):
     rated_product=models.ForeignKey(
-        Product, on_delete=models.CASCADE, related_name="star_rating", default=None)
+        Product, on_delete=models.CASCADE, related_name="ratings")
     author=models.ForeignKey(
         User, on_delete=models.CASCADE, null=True, related_name="rating_author")
-    rating = models.IntegerField(choices=RATING, default=None) 
-    review = models.CharField(max_length=100, null=True)
+    rating = models.IntegerField(choices=RATING, default=None, null=True, blank=True) 
+    review = models.CharField(max_length=100, null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.rated_product}: {self.rating}"
 
 

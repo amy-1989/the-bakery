@@ -3,9 +3,10 @@ from django.contrib import messages
 from django.db.models import Q
 from django.db.models.functions import Lower
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
 
-from .models import Product, Category
-from .forms import ProductForm
+from .models import Product, Category, Rating
+from .forms import ProductForm, RatingForm
 
 def products(request):
     """ View to display all products, including searching and filtering"""
@@ -60,12 +61,34 @@ def products(request):
 
 
 def product_detail(request, product_id):
-    """ View to display product detail page"""
+    """ View to display product detail page, including product ratings"""
+
+    queryset = Product.objects.all()
+    product = get_object_or_404(queryset, pk=product_id)
+    ratings = product.ratings.all()
     
-    product = get_object_or_404(Product, pk=product_id)
+
+    if request.method == "POST":
+
+        rating_form = RatingForm(data=request.POST)
+
+        if rating_form.is_valid():
+            rating = rating_form.save(commit=False)
+            rating.author = request.user
+            rating.product = product
+            rating.save()
+            messages.success(request, "Product review added successfully!")
+            return HttpResponseRedirect(reverse('product_detail', args=[product_id]))
+        else:
+            messages.error(request, "Error adding review! Please check your form and try again!")
+            rating_form = RatingForm()
+
+    rating_form = RatingForm()
  
     context = {
         'product': product,
+        'rating_form': rating_form,
+        'ratings': ratings,
     }
     return render(request, 'products/product_detail.html', context)
 

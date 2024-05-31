@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 
 
@@ -45,8 +46,9 @@
                             {% endif %}
                             {% if request.user.is_superuser %}
                             <small class="ml-3">
-                                <a href="{% url 'edit_product' product.id %}">Edit</a> | 
-                                <button class="btn product-delete" product_id="{{ product.id}}" type="button">Delete</button>
+                                <a href="{% url 'edit_product' product.id %}">Edit</a> |
+                                <button class="btn product-delete" product_id="{{ product.id}}"
+                                    type="button">Delete</button>
                             </small>
                             {% endif %}
                         </div>
@@ -75,8 +77,9 @@
             </div>
         </div>
     </div>
+    {% include "products/star_rating.html" %}
 </div>
-</div>
+
 
 
 
