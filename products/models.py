@@ -1,5 +1,13 @@
 from django.db import models
+from django.contrib.auth.models import User
 
+RATING = (
+    (1, "⭐☆☆☆☆"),
+    (2, "⭐⭐☆☆☆"),
+    (3, "⭐⭐⭐☆☆"),
+    (4, "⭐⭐⭐⭐☆"),
+    (5, "⭐⭐⭐⭐⭐"),
+    )
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
@@ -22,6 +30,11 @@ class Product(models.Model):
 
 
 class Rating(models.Model):
-    rating = models.CharField(max_length=100, null=True)
+    rated_product=models.ForeignKey(
+        Product, on_delete=models.CASCADE, related_name="star_rating", default=None)
+    author=models.ForeignKey(
+        User, on_delete=models.CASCADE, null=True, related_name="rating_author")
+    rating = models.IntegerField(choices=RATING, default=None) 
+    review = models.CharField(max_length=100, null=True)
 
 
