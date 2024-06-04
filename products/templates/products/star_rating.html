@@ -32,7 +32,7 @@
                         <span><strong>( {{ rating.rating }}/5 )</strong></span>
                         <p>{{ rating.review }}</p>
                         {% if user.is_authenticated and rating.author == user %}
-                        <button class="btn btn-secondary btn-rating-delete" review_id="{{review.id}}">Delete</button>
+                        <button class="btn btn-secondary rating-delete" rating_id="{{rating.id}}">Delete</button>
                         {% endif %}
                     </div>
                     {% endfor %}

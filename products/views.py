@@ -63,8 +63,7 @@ def products(request):
 def product_detail(request, product_id):
     """ View to display product detail page, including product ratings"""
 
-    queryset = Product.objects.all()
-    product = get_object_or_404(queryset, pk=product_id)
+    product = get_object_or_404(Product, pk=product_id)
     ratings = product.ratings.all()
     
 
@@ -75,7 +74,7 @@ def product_detail(request, product_id):
         if rating_form.is_valid():
             rating = rating_form.save(commit=False)
             rating.author = request.user
-            rating.product = product
+            rating.rated_product = product
             rating.save()
             messages.success(request, "Product review added successfully!")
             return HttpResponseRedirect(reverse('product_detail', args=[product_id]))
@@ -163,3 +162,20 @@ def delete_product(request, product_id):
     product.delete()
     messages.success(request, 'Product deleted!')
     return redirect(reverse('products'))
+
+
+@login_required
+def delete_rating(request, rated_product_id, id):
+    """ Delete a review from the product detail """
+
+    rating = get_object_or_404(Rating, id=id)
+
+    if request.user == rating.author:
+        rating.delete()
+        messages.success(request, 'Product rating deleted!')
+    else:
+        messages.ERROR(request, 'You can only delete your own product ratings!')
+        
+    product_detail_url = reverse('product_detail', args=[rated_product_id])
+    return HttpResponseRedirect(product_detail_url)
+    
