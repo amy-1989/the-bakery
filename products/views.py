@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 
 from .models import Product, Category, Rating
-from .forms import ProductForm, RatingForm
+from .forms import ProductForm, RatingForm, CommentForm
 
 def products(request):
     """ View to display all products, including searching and filtering"""
@@ -66,7 +66,9 @@ def product_detail(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
     ratings = product.ratings.all()
     average_rating = ratings.aggregate(avg=Avg('rating'))
-    
+    comments = product.comments.filter(parent__isnull=True).order_by("created_on")
+    comment_count = product.comments.count()
+
     if request.method == "POST":
 
         rating_form = RatingForm(data=request.POST)
@@ -81,15 +83,44 @@ def product_detail(request, product_id):
         else:
             messages.error(request, "Error adding review! Please check your form and try again!")
             rating_form = RatingForm()
+        
+        comment_form = CommentForm(data=request.POST)
 
-    rating_form = RatingForm()
+        if comment_form.is_valid():
+            parent_obj = None
+            try:
+                parent_id = int(request.POST.get('parent_id'))
+            except TypeError:
+                parent_id = None
+                print('There is no parent id! This will be a new comment!')
+            if parent_id:
+                parent_obj = Comment.objects.get(id=parent_id)
+                if parent_obj:
+                    reply_comment = comment_form.save(commit=False)
+                    reply_comment.parent = parent_obj
+            comment = comment_form.save(commit=False)
+            comment.author = request.user
+            comment.product = product
+            comment.save()
+            messages.success(request, "Comment added successfully!")
+            return HttpResponseRedirect(reverse('product_detail', args=[product_id]))
+        else:
+            messages.error(request, "Error adding comment! Please try again!")
+            comment_form = CommentForm()
+    else:
+        comment_form = CommentForm()
+        rating_form = RatingForm()
  
     context = {
         'product': product,
         'rating_form': rating_form,
         'ratings': ratings,
         'average_rating': average_rating,
+        'comment_count': comment_count,
+        'comment_form': comment_form,
+        'comments': comments,
     }
+
     return render(request, 'products/product_detail.html', context)
 
 

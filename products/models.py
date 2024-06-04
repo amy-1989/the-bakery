@@ -40,6 +40,23 @@ class Rating(models.Model):
     def __str__(self):
         return f"{self.rated_product} : {self.rating}"
 
+
+class Comment(models.Model):
+    product=models.ForeignKey(
+        Product, on_delete=models.CASCADE, related_name="comments")
+    author=models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="commenter")
+    body=models.TextField()
+    parent=models.ForeignKey(
+        "self", null=True, blank=True, on_delete=models.CASCADE,
+        related_name="replies")
+    created_on=models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering=["created_on"]
+
+    def __str__(self):
+        return f"Comment: {self.body} by {self.author}"
     
 
 

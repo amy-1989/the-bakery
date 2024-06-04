@@ -35,11 +35,16 @@
                             {% if average_rating %}
                             <span title="{{ average_rating.avg}}/5">
                                 <!-- By default the star is full else it is empty -->
-                                <i class=" stars fa fa-star{% if average_rating.avg < 0.5%}-o{% endif %}" aria-hidden="true"></i>
-                                <i class="stars fa fa-star{% if average_rating.avg < 1.5%}-o{% endif %}" aria-hidden="true"></i>
-                                <i class=" stars fa fa-star{% if average_rating.avg < 2.5%}-o{% endif %}" aria-hidden="true"></i>
-                                <i class="stars fa fa-star{% if average_rating.avg < 3.5%}-o{% endif %}" aria-hidden="true"></i>
-                                <i class="stars fa fa-star{% if average_rating.avg < 4.5%}-o{% endif %}" aria-hidden="true"></i>
+                                <i class=" stars fa fa-star{% if average_rating.avg < 0.5%}-o{% endif %}"
+                                    aria-hidden="true"></i>
+                                <i class="stars fa fa-star{% if average_rating.avg < 1.5%}-o{% endif %}"
+                                    aria-hidden="true"></i>
+                                <i class=" stars fa fa-star{% if average_rating.avg < 2.5%}-o{% endif %}"
+                                    aria-hidden="true"></i>
+                                <i class="stars fa fa-star{% if average_rating.avg < 3.5%}-o{% endif %}"
+                                    aria-hidden="true"></i>
+                                <i class="stars fa fa-star{% if average_rating.avg < 4.5%}-o{% endif %}"
+                                    aria-hidden="true"></i>
                             </span>
                             {% else %}
                             <small class="text-left text-muted mb-2">No Rating</small>
@@ -84,6 +89,7 @@
         </div>
     </div>
     {% include "products/star_rating.html" %}
+    {% include "products/comments.html" %}
 </div>
 
 
