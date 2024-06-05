@@ -61,7 +61,8 @@ def products(request):
 
 
 def product_detail(request, product_id):
-    """ View to display product detail page, including product ratings"""
+    """ View to display product detail page, including product ratings,
+        and comments on products"""
 
     product = get_object_or_404(Product, pk=product_id)
     ratings = product.ratings.all()

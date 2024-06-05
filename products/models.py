@@ -34,7 +34,7 @@ class Rating(models.Model):
         Product, on_delete=models.CASCADE, related_name="ratings")
     author=models.ForeignKey(
         User, on_delete=models.CASCADE, null=True, related_name="rating_author")
-    rating = models.IntegerField(choices=RATING, default=None, null=True, blank=True) 
+    rating = models.IntegerField(choices=RATING, default=None, null=True, blank=False) 
     review = models.CharField(max_length=100, null=True, blank=True)
 
     def __str__(self):

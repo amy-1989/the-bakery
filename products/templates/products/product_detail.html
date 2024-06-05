@@ -32,7 +32,7 @@
                         <p> {{ product.description }} </p>
                         <p> €{{ product.price }}</p>
                         <div class="text-left ml-3 mt-3">
-                            {% if average_rating %}
+                            {% if average_rating.avg %}
                             <span title="{{ average_rating.avg}}/5">
                                 <!-- By default the star is full else it is empty -->
                                 <i class=" stars fa fa-star{% if average_rating.avg < 0.5%}-o{% endif %}"
