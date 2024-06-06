@@ -1,1 +1,1 @@
-web: gunicorn the-bakery.wsgi:application
+web: gunicorn the_bakery.wsgi:application
