@@ -5,7 +5,7 @@ from django.db.models.functions import Lower
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 
-from .models import Product, Category, Rating
+from .models import Product, Category, Rating, Comment
 from .forms import ProductForm, RatingForm, CommentForm
 
 def products(request):
@@ -211,4 +211,40 @@ def delete_rating(request, rated_product_id, id):
         
     product_detail_url = reverse('product_detail', args=[rated_product_id])
     return HttpResponseRedirect(product_detail_url)
+
+
+def comment_delete(request, product_id, comment_id):
+    """
+    view to delete comment
+    """
+
+    comment = get_object_or_404(Comment, comment_id=comment_id)
+
+    if comment.author == request.user:
+        comment.delete()
+        messages.success(request, 'Comment deleted!')
+    else:
+        messages.error(request, 'You can only delete your own comments!')
     
+    product_detail_url = reverse('product_detail', args=[product_id])
+
+    return HttpResponseRedirect(product_detail_url)
+
+
+def reply_delete(request, product_id, reply_id):
+    """
+    view to delete a reply
+    """
+    
+    reply = get_object_or_404(Comment, reply_id=reply_id)
+
+    if reply.author == request.user:
+        reply.delete()
+        messages.success(request, 'Reply deleted!')
+    else:
+        messages.error(request,
+                             'You can only delete your own replies!')
+
+    product_detail_url = reverse('product_detail', args=[product_id])
+
+    return HttpResponseRedirect(product_detail_url)

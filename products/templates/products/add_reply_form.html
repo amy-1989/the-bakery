@@ -1,0 +1,21 @@
+{% load crispy_forms_tags %}
+
+<button class="btn btn-reply btn-secondary text-center" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#replyButton{{ comment.id }}" aria-expanded="false">Reply</button>
+                        <hr />
+
+        <!--Create Replies-->
+    <div class="card collapse" id="replyButton{{ comment.id }}">
+        {% if user.is_authenticated %}
+        <h3>Leave a reply:</h3>
+        <p>Posting as: {{ user.username }}</p>
+        <form  id="commentForm" method="post" style="margin-top: 1.3em;">
+            {{ comment_form | crispy }}
+            {% csrf_token %}
+            <input type="hidden" name="parent_id" value="{{ comment.id }}">
+            <button id="replyButton" type="submit" class="btn btn-secondary">Add Reply</button>
+        </form>
+        {% else %}
+        <p>Log in to leave a reply</p>
+        {% endif %}
+    </div>

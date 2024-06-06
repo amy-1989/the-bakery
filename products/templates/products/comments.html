@@ -25,7 +25,22 @@
                         {% if user.is_authenticated and comment.author == user %}
                         <button class="btn btn-secondary comment-delete" comment_id="{{comment.id}}">Delete</button>
                         {% endif %}
-                    </div>
+                        {% include 'products/add_reply_form.html' %}
+                    </div>                       
+                    <!--Display Replies to Comments-->
+                    {% for reply in comment.replies.all %}
+                    <div class="p-4 pt-1">
+                        <small><p> {{ reply.author }} says: </small></p>
+                        <div id="reply{{ reply.id }}">
+                        {{ reply.body | linebreaks }}
+                        </div>
+                        <hr />
+                        <!--Reply Delete Buttons-->
+                        {% if user.is_authenticated and reply.author == user %}
+                        <button class="btn btn-reply-delete btn-secondary" reply_id="{{ reply.id }}">Delete</button>
+                        {% endif %}
+                    </div> 
+                    {% endfor %}     
                     {% endfor %}
                 </div>
             </div>
