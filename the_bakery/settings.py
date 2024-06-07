@@ -121,7 +121,7 @@ WSGI_APPLICATION = 'the_bakery.wsgi.application'
 
 if 'DATABASE_URL' in os.environ:
     DATABASES = {
-        'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+        'default': dj_database_url.parse('postgres://mmcrabwx:fq5NFntFb8LJXiV4j3fnKRlfr-k82hQY@tyke.db.elephantsql.com/mmcrabwx')
     }
 else:
     DATABASES = {
@@ -188,8 +188,8 @@ if 'USE_AWS' in os.environ:
     # Bucket Config
     AWS_STORAGE_BUCKET_NAME = 'the-bakery'
     AWS_S3_REGION_NAME = 'eu-north-1'
-    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
-    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+    AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
     AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 
     # Static and media files
