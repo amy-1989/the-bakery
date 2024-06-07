@@ -121,7 +121,7 @@ WSGI_APPLICATION = 'the_bakery.wsgi.application'
 
 if 'DATABASE_URL' in os.environ:
     DATABASES = {
-        'default': dj_database_url.parse('postgres://mmcrabwx:fq5NFntFb8LJXiV4j3fnKRlfr-k82hQY@tyke.db.elephantsql.com/mmcrabwx')
+        'default': dj_database_url.parse(os.getenv('DATABASE_URL'))
     }
 else:
     DATABASES = {
