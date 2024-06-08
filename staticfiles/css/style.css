@@ -1,0 +1,195 @@
+html {
+    overflow-x: hidden;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Roboto-Slab', sans-serif;
+}
+
+footer {
+    background-color: rgb(165, 221, 243);
+    margin-top: auto;
+    font-family: 'Roboto-Slab', sans-serif;
+}
+
+footer li {
+    list-style-type: none;
+}
+
+.slider {
+    width: fit-content;
+}
+
+#carouselControls .carousel-item img {
+    object-fit: cover;
+    object-position: center;
+    overflow: hidden;
+}
+
+.carousel-caption {
+    background-color: rgba(238, 176, 247, 0.719);
+}
+
+a {
+    text-decoration: none;
+    color: rgb(47, 57, 61);
+}
+
+a:hover {
+    color: rgb(94, 125, 136);
+}
+
+.carousel-caption h5 {
+    font-size: 3rem;
+}
+
+.shopLink:hover {
+    color: rgb(94, 125, 136);
+}
+
+.socialLinks {
+    font-size: 3rem;
+}
+
+.shopBag {
+    font-size: 2rem;
+}
+
+.allauthLinks {
+    text-decoration: underline;
+    color: rgb(6, 175, 241);
+}
+
+.bag {
+    list-style-type: none;
+    padding: 0;
+}
+
+.banner {
+    background-color: pink;
+
+}
+
+.remove-item {
+    cursor: pointer;
+}
+
+.orderSum {
+    margin-top: 3rem;
+}
+
+.quantityHeader {
+    text-align: center !important;
+}
+
+.heading {
+    text-decoration: underline;
+}
+
+
+.StripeElement,
+.stripe-style-input {
+  box-sizing: border-box;
+  height: 40px;
+  padding: 10px 12px;
+  border: 1px solid black;
+  border-radius: 0px;
+  background-color: white;
+  box-shadow: 0 1px 3px 0 #e6ebf1;
+  -webkit-transition: box-shadow 150ms ease;
+  transition: box-shadow 150ms ease;
+}
+
+.StripeElement--focus,
+.stripe-style-input:focus,
+.stripe-style-input:active {
+  box-shadow: 0 1px 3px 0 #cfd7df;
+}
+
+.StripeElement--webkit-autofill {
+  background-color: #fefde5 !important;
+}
+
+.stripe-style-input::placeholder {
+    color: #aab7c4;
+}
+
+.fieldset-label {
+    position: relative;
+    right: .5rem;
+}
+
+#payment-form .form-control,
+#card-element {
+    color: #000;
+    border: 1px solid #000;
+}
+#loading-overlay {
+	display: none;
+	position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(23, 162, 184, .85);
+    z-index: 9999;
+}
+
+.loading-spinner {
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    height: 100%;
+}
+
+.formBoxes {
+    border-color: black;
+}
+
+label {
+    margin-top: .7rem;
+    margin-left: 2rem;
+    
+}
+
+.form-check-input[type=checkbox] {
+     border-radius: 0 !important;  
+}
+
+.form-check .form-check-input {
+    width: 40px;
+    height: 40px;
+}
+
+@media only screen and (min-width: 768px) {
+    #carouselControls .carousel-item img {
+        object-fit: cover;
+        object-position: center;
+        overflow: hidden;
+        height: 80vh;
+        width: 50vw;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .navbar-brand { 
+        margin-right: 0 !important;
+    }
+
+    .checkoutCard {
+        width: 90vw !important;
+    }
+
+    .quantityForm {
+        justify-content: left !important;
+    }
+
+    .checkoutSuccess {
+        margin-left: 0 !important;
+    }
+}
+

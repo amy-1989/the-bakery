@@ -145,7 +145,7 @@ def checkout_success(request, order_number):
     order = get_object_or_404(Order, order_number=order_number)
 
     profile = UserProfile.objects.get(user=request.user)
-    address = UserAddress.objects.filter(user=request.user, is_primary=True).first() 
+    address = UserAddress.objects.filter(user=request.user).first() 
 
     # Attach the user's profile to the order
     order.user_profile = profile
@@ -165,7 +165,7 @@ def checkout_success(request, order_number):
         
         user_profile_form = AddressForm(profile_data, instance=address)
         if user_profile_form.is_valid():
-            address.is_primary=True
+
             user_profile_form.save()
 
     messages.success(request, f'Order successfully processed! \
@@ -178,6 +178,8 @@ def checkout_success(request, order_number):
     template = 'checkout/checkout_success.html'
     context = {
         'order': order,
+        'profile': profile,
+        'address': address,
     }
 
     return render(request, template, context)

@@ -66,20 +66,21 @@ class StripeWH_Handler:
                 shipping_details.address[field] = None
 
          # Update profile information if save_info was checked
-        profile = None
+        profile = UserProfile()
         address = None
         username = intent.metadata.username
         if username != 'AnonymousUser':
             profile = UserProfile.objects.get(user__username=username)
-            address = UserAddress.objects.filter(profile=profile, is_primary=True).first()
+            address = UserAddress.objects.filter(profile=profile).first()
+            if address is None:
+                address = UserAddress()
             if save_info:
-                address.phone_number = shipping_details.phone
-                address.country = shipping_details.address.country
-                address.postcode = shipping_details.address.postal_code
-                address.town_or_city = shipping_details.address.city
-                address.street_address1 = shipping_details.address.line1
-                address.street_address2 = shipping_details.address.line2
-                address.county = shipping_details.address.state
+                address.country = shipping_details.get("address").get("country")
+                address.postcode = shipping_details.get("address").get("postal_code")
+                address.town_or_city = shipping_details.get("address").get("city")
+                address.street_address1 = shipping_details.get("address").get("line1")
+                address.street_address2 = shipping_details.get("address").get("line2")
+                address.county = shipping_details.get("address").get("state")
                 profile.save()
                 address.save()
 

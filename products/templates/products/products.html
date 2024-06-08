@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load cloudinary %}
 
 {% block content %}
 {% include "profiles/modal.html" %}
@@ -64,7 +65,7 @@
                                 {% else %}
                                 <a href="{% url 'product_detail' product.id %}">
                                     <img class="card-img-top img-fluid"
-                                        src="/static/images/product_images/no_image.webp" alt="{{ product.name }}">
+                                        src="{% cloudinary 'no_image.webp'}" alt="{{ product.name }}">
                                 </a>
                                 {% endif %}
                                 <div class="card-body pb-0 mb-3">
