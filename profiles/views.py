@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect, reverse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 
-from .models import UserProfile, UserAddress
+from .models import UserProfile, UserAddress, User
 from checkout.models import Order
 from .forms import AddressForm
 from django.contrib import messages
@@ -126,6 +126,23 @@ def delete_address(request, id):
     else:
         messages.add_message(request, messages.ERROR,
                              'You can only delete your own addresses!')
+
+    return HttpResponseRedirect('/')
+
+
+@login_required
+def delete_account(request, id):
+    """
+    view to delete user including profile
+    """
+    user = get_object_or_404(User, id=id)
+
+    if user == request.user:
+        user.delete()
+        messages.add_message(request, messages.SUCCESS, 'Account deleted!')
+    else:
+        messages.add_message(request, messages.ERROR,
+                             'You can only delete your own account!')
 
     return HttpResponseRedirect('/')
 
