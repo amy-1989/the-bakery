@@ -141,32 +141,14 @@ def checkout_success(request, order_number):
     """
     Handle successful checkouts
     """
-    save_info = request.session.get('save_info')
+    
     order = get_object_or_404(Order, order_number=order_number)
 
     profile = UserProfile.objects.get(user=request.user)
-    address = UserAddress.objects.filter(user=request.user).first() 
 
     # Attach the user's profile to the order
     order.user_profile = profile
     order.save()
-
-    # Save the user's info
-    if save_info:
-        profile_data = {
-            'phone_number': order.phone_number,
-            'country': order.country,
-            'postcode': order.postcode,
-            'town_or_city': order.town_or_city,
-            'street_address1': order.street_address1,
-            'street_address2': order.street_address2,
-            'county': order.county,
-        }
-        
-        user_profile_form = AddressForm(profile_data, instance=address)
-        if user_profile_form.is_valid():
-
-            user_profile_form.save()
 
     messages.success(request, f'Order successfully processed! \
         Your order number is {order_number}. A confirmation \
@@ -179,7 +161,6 @@ def checkout_success(request, order_number):
     context = {
         'order': order,
         'profile': profile,
-        'address': address,
     }
 
     return render(request, template, context)
