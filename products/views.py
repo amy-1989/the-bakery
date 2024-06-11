@@ -68,7 +68,6 @@ def product_detail(request, product_id):
     ratings = product.ratings.all()
     average_rating = ratings.aggregate(avg=Avg('rating'))
     comments = product.comments.filter(parent__isnull=True).order_by("created_on")
-    comment_count = product.comments.count()
 
     if request.method == "POST":
 
@@ -79,10 +78,8 @@ def product_detail(request, product_id):
             rating.author = request.user
             rating.rated_product = product
             rating.save()
-            messages.success(request, "Product review added successfully!")
             return HttpResponseRedirect(reverse('product_detail', args=[product_id]))
         else:
-            messages.error(request, "Error adding review! Please check your form and try again!")
             rating_form = RatingForm()
         
         comment_form = CommentForm(data=request.POST)
@@ -103,10 +100,8 @@ def product_detail(request, product_id):
             comment.author = request.user
             comment.product = product
             comment.save()
-            messages.success(request, "Comment added successfully!")
             return HttpResponseRedirect(reverse('product_detail', args=[product_id]))
         else:
-            messages.error(request, "Error adding comment! Please try again!")
             comment_form = CommentForm()
     else:
         comment_form = CommentForm()
@@ -117,7 +112,6 @@ def product_detail(request, product_id):
         'rating_form': rating_form,
         'ratings': ratings,
         'average_rating': average_rating,
-        'comment_count': comment_count,
         'comment_form': comment_form,
         'comments': comments,
     }
@@ -213,11 +207,12 @@ def delete_rating(request, rated_product_id, id):
     return HttpResponseRedirect(product_detail_url)
 
 
+@login_required
 def comment_delete(request, product_id, comment_id):
     """
     view to delete comment
     """
-
+    product = get_object_or_404(Product, product_id=product_id)
     comment = get_object_or_404(Comment, comment_id=comment_id)
 
     if comment.author == request.user:
@@ -231,11 +226,12 @@ def comment_delete(request, product_id, comment_id):
     return HttpResponseRedirect(product_detail_url)
 
 
+@login_required
 def reply_delete(request, product_id, reply_id):
     """
     view to delete a reply
     """
-    
+    product = get_object_or_404(Product, product_id=product_id)
     reply = get_object_or_404(Comment, reply_id=reply_id)
 
     if reply.author == request.user:

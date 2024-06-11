@@ -6,7 +6,7 @@ const deleteCommentConfirm = document.getElementById("deleteConfirm");
  * Initializes delete functionality for the provided delete post buttons.
  * 
  * For each button in the `deleteCommentsButtons` collection:
- * - Retrieves the associated address's ID upon click.
+ * - Retrieves the associated comment's ID upon click.
  * - Updates the `deleteCommentConfirm` link's href to point to the 
  * deletion endpoint for the specific comment.
  * - Displays a confirmation modal (`deleteModal`) to prompt 
