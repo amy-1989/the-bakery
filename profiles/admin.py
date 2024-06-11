@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import UserProfile, UserAddress
+from .models import UserProfile, UserAddress, FeedbackForm
 
 
 class UserAddressAdminInline(admin.TabularInline):
@@ -17,4 +17,5 @@ class UserProfileAdmin(admin.ModelAdmin):
 
 admin.site.register(UserProfile, UserProfileAdmin,)
 admin.site.register(UserAddress)
+admin.site.register(FeedbackForm)
 

@@ -8,5 +8,6 @@ urlpatterns = [
     path('address/edit/<slug:id>/', views.edit_address, name='edit_address'),
     path('address/delete/<int:id>/', views.delete_address, name='delete_address'),
     path('account/delete/<int:id>/', views.delete_account, name='delete_account'),
+     path('profile/feedback/', views.customer_feedback, name='customer_feedback'),
     path('', views.profile, name='profile'),
 ]

@@ -54,6 +54,18 @@ class UserAddress(models.Model):
         return f'Address for user profile {self.profile}'
 
 
+class FeedbackForm(models.Model):
+    order_number = models.CharField(max_length=200)
+    customer_name = models.CharField(max_length=200)
+    email = models.EmailField()
+    message = models.TextField()
+    seen = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"Feedback for order number {self.order_number} from {self.customer_name}"
+
+
+
 
    
 

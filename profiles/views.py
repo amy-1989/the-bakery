@@ -1,9 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect, reverse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 
-from .models import UserProfile, UserAddress, User
+from .models import UserProfile, UserAddress, User, FeedbackForm
 from checkout.models import Order
-from .forms import AddressForm
+from .forms import AddressForm, CustomerFeedbackForm
 from django.contrib import messages
 
 
@@ -39,7 +39,7 @@ def profile(request):
 
     return render(request, template, context)
 
-
+@login_required
 def order_history(request, order_number):
     """ to view the users previous order history """
     order = get_object_or_404(Order, order_number=order_number)
@@ -147,5 +147,27 @@ def delete_account(request, id):
     return HttpResponseRedirect('/')
 
 
-  
+@login_required
+def customer_feedback(request):
+    """
+    Renders the Feedback form page
+    """
+    feedback = FeedbackForm.objects.all()
+    if request.method == "POST":
+        customer_feedback_form = CustomerFeedbackForm(data=request.POST)
+        if customer_feedback_form.is_valid():
+            customer_feedback_form.save()
+            messages.success(request, 
+                "Message received! We will respond as soon as possible!")
+
+
+    customer_feedback_form = CustomerFeedbackForm()
+
+    return render(
+        request,
+        "profiles/feedback_form.html",
+        {"customer_feedback_form": customer_feedback_form,
+         "feedback": feedback}
+    )
+
 

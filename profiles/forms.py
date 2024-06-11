@@ -1,5 +1,5 @@
 from django import forms
-from .models import UserAddress
+from .models import UserAddress, FeedbackForm
 
 
 class AddressForm(forms.ModelForm):
@@ -28,4 +28,31 @@ class AddressForm(forms.ModelForm):
         for field in self.fields:
             self.fields[field].widget.attrs['class'] = 'stripe-style-input'
             self.fields[field].label = ''
+
+
+class CustomerFeedbackForm(forms.ModelForm):
+    class Meta:
+        model = FeedbackForm
+        fields = ('order_number',
+                  'customer_name', 'email',
+                  'message',
+                )
+
+    def __init__(self, *args, **kwargs):
+        """
+        Add placeholders and classes, remove auto-generated
+        labels and set autofocus on first field
+        """
+        super().__init__(*args, **kwargs)
+
+        self.fields['order_number'].widget.attrs['autofocus'] = True
+        self.fields['customer_name'].widget.attrs['placeholder'] = 'Name'
+        self.fields['email'].widget.attrs['placeholder'] = 'Email Address'
+        self.fields['message'].widget.attrs['placeholder'] = 'Place your message here'
+        self.fields['order_number'].widget.attrs['placeholder'] = 'Order Number'
+
+        for field in self.fields:
+            self.fields[field].widget.attrs['class'] = 'stripe-style-input'
+            self.fields[field].label = ''
+            
 
