@@ -1,13 +1,13 @@
 const deleteReplyModal = new bootstrap.Modal(document.getElementById("deleteModal"));
-const deleteReplyButtons = document.getElementsByClassName("comment-delete");
+const deleteReplyButtons = document.getElementsByClassName("btn-reply-delete");
 const deleteReplyConfirm = document.getElementById("deleteConfirm");
 
 /**
  * Initializes delete functionality for the provided delete post buttons.
  * 
- * For each button in the `deleteCommentsButtons` collection:
- * - Retrieves the associated address's ID upon click.
- * - Updates the `deleteCommentConfirm` link's href to point to the 
+ * For each button in the `deleteRepliesButtons` collection:
+ * - Retrieves the associated replies' ID upon click.
+ * - Updates the `deleteReplyConfirm` link's href to point to the 
  * deletion endpoint for the specific comment.
  * - Displays a confirmation modal (`deleteModal`) to prompt 
  * the user for confirmation before deletion.

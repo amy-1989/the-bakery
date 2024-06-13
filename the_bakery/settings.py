@@ -13,7 +13,7 @@ import os
 import dj_database_url
 from pathlib import Path
 
-if Path("env.py").exists():
+if os.path.exists('env.py'):
     import env
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -122,7 +122,9 @@ LOGIN_REDIRECT_URL = '/'
 
 WSGI_APPLICATION = 'the_bakery.wsgi.application'
 
-CLOUDINARY_URL = os.getenv('CLOUDINARY_URL')
+CLOUDINARY_STORAGE = {
+    'CLOUDINARY_URL' : os.environ.get('CLOUDINARY_URL')
+}
 
 
 # Database
