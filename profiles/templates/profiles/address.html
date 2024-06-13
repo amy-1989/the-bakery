@@ -10,6 +10,8 @@
     <div class="row">
         <div class="col text-center my-5">
             <h2> Saved Delivery Addresses</h2>
+            <a href="{% url 'profile' %}" class="btn btn-secondary rounded-0 mt-3 mx-auto"><i class="fa-solid fa-angles-left"></i> Back to Profile
+            </a>
         </div>
     </div>
     <div class="row">
@@ -29,7 +31,7 @@
                         {% else %}
                         <a href="{% url 'set_primary_address' address.id %}"> <small>Make Primary Address</small></a>
                         {% endif %}
-                        <a href="{% url 'edit_address' address.id %}"> <small>Edit</small></a>
+                        <button class="btn"><a href="{% url 'edit_address' address.id %}"> <small>Edit</small></a></button>
                         <button class="btn address-delete" address_id="{{address.id}}" type="button">
                             <small>Delete</small></button>
                     </div>
@@ -41,9 +43,8 @@
     <div class="row">
         {% endif %}
         {% endfor %}
-        <div class="col d-flex justify-content-center">
-            <a href="{% url 'profile' %}" class="btn btn-secondary rounded-0 mt-3 mx-auto"><i class="fa-solid fa-angles-left"></i> Back to Profile
-            </a>
+        <div class="col text-center my-5">
+            
         </div>
     </div>
 </div>

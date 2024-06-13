@@ -104,7 +104,7 @@ def edit_address(request, id=None):
         if address_form.is_valid():
             address_form.save()
             messages.success(request, "Address edited successfully!")
-        return HttpResponseRedirect('/')
+        return redirect (reverse('profile_address'))
 
     return render(request, 'profiles/edit_address.html', {
         'address': address if id else None,
