@@ -32,6 +32,7 @@
                     <div class="col-md-6">
                         <p> {{ product.description }} </p>
                         <p> €{{ product.price }}</p>
+                        <!--Product Average Rating-->
                         <div class="text-left ml-3 mt-3">
                             {% if average_rating.avg %}
                             <span title="{{ average_rating.avg}}/5">
@@ -50,20 +51,24 @@
                             {% else %}
                             <small class="text-left text-muted mb-2">No Rating</small>
                             {% endif %}</div>
+                        <!--Product Average Rating Ends-->
                         <div class="text-left ml-3 mt-3">
                             {% if product.category %}
                             <small class="text-left text-muted mb-2"><a
                                     href="{% url 'products' %}?category={{ product.category }}"><i
                                         class="fa-solid fa-tag"></i>{{ product.category }}</small></a>
                             {% endif %}
+                        </div>
+                        <!--Product Management Buttons-->
+                        <div>
                             {% if request.user.is_superuser %}
-                            <small class="ml-3">
-                                <a href="{% url 'edit_product' product.id %}">Edit</a> |
-                                <button class="btn product-delete" product_id="{{ product.id}}"
-                                    type="button">Delete</button>
-                            </small>
+                            <button class="btn"><a href="{% url 'edit_product' product.id %}"><small>Edit</small></a></button>
+                            |
+                            <button class="btn product-delete" product_id="{{ product.id}}"
+                                type="button"><small>Delete</small></button>
                             {% endif %}
                         </div>
+                        <!--Product Management Buttons Ends Here-->
                         <form class="form" action="{% url 'add_to_bag' product.id %}" method="POST">
                             {% csrf_token %}
                             <div class="form-group">
@@ -89,12 +94,13 @@
             </div>
         </div>
     </div>
-    {% include "products/star_rating.html" %}
-    {% include "products/comments.html" %}
 </div>
-
-
-
+<div class="container mb-3">
+    <div class="row">
+        {% include "products/star_rating.html" %}
+        {% include "products/comments.html" %}
+    </div>
+</div>
 
 {% endblock %}
 {% block postloadjs %}

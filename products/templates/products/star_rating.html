@@ -1,43 +1,42 @@
 {% load crispy_forms_tags %}
 
-<div class="row">
-    <div class="col d-flex justify-content-center">
-        <div class="card w-75 shadow p-3 bg-white rounded">
-            <div class="row">
-                <div class="col-md-6">
-                    <h3>Ratings:</h3>
-                    {% if user.is_authenticated %}
-                    <h3>Rate this Product:</h3>
-                    <form id="ratingForm" method="post" style="margin-top: 1.3em;">
-                        {{ rating_form | crispy }}
-                        {% csrf_token %}
-                        <p>By: {{ user.username }} </p>
-                        <button id="submitReviewButton" type="submit" class="btn btn-secondary">Submit</button>
-                    </form>
-                    {% else %}
-                    <p>Log in to leave a rating!</p>
+<div class="col d-flex justify-content-center">
+    <div class=" card w-75 shadow p-3 bg-white rounded">
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Ratings:</h3>
+                <hr />
+                {% if user.is_authenticated %}
+                <p>Rate this Product:</p>
+                <form id="ratingForm" method="post" style="margin-top: 1.3em;">
+                    {{ rating_form | crispy }}
+                    {% csrf_token %}
+                    <p>By: {{ user.username }} </p>
+                    <button id="submitReviewButton" type="submit" class="btn btn-secondary">Submit</button>
+                </form>
+                {% else %}
+                <p>Log in to leave a rating!</p>
+                {% endif %}
+                <!--Display Ratings-->
+                {% for rating in ratings %}
+                <hr />
+                <div>
+                    <p><small>{{ rating.author }} rated this product:</small></p>
+                    <span title="{{ rating.rating }}/5">
+                        <!-- By default the star is full else it is empty -->
+                        <i class=" stars fa fa-star{% if rating.rating < 0.5%}-o{% endif %}" aria-hidden="true"></i>
+                        <i class="stars fa fa-star{% if rating.rating < 1.5%}-o{% endif %}" aria-hidden="true"></i>
+                        <i class=" stars fa fa-star{% if rating.rating < 2.5%}-o{% endif %}" aria-hidden="true"></i>
+                        <i class="stars fa fa-star{% if rating.rating < 3.5%}-o{% endif %}" aria-hidden="true"></i>
+                        <i class="stars fa fa-star{% if rating.rating < 4.5%}-o{% endif %}" aria-hidden="true"></i>
+
+                    </span>
+                    <p>{{ rating.review }}</p>
+                    {% if user.is_authenticated and rating.author == user %}
+                    <button class="btn btn-secondary rating-delete" rating_id="{{rating.id}}">Delete</button>
                     {% endif %}
-                    <!--Display Ratings-->
-                    {% for rating in ratings %}
-                    <div>
-                        <p>{{ rating.author }} rated this product:</p>
-                        <span title="{{ rating.rating }}/5">
-                            <!-- By default the star is full else it is empty -->
-                            <i class=" stars fa fa-star{% if rating.rating < 0.5%}-o{% endif %}" aria-hidden="true"></i>
-                            <i class="stars fa fa-star{% if rating.rating < 1.5%}-o{% endif %}" aria-hidden="true"></i>
-                            <i class=" stars fa fa-star{% if rating.rating < 2.5%}-o{% endif %}" aria-hidden="true"></i>
-                            <i class="stars fa fa-star{% if rating.rating < 3.5%}-o{% endif %}" aria-hidden="true"></i>
-                            <i class="stars fa fa-star{% if rating.rating < 4.5%}-o{% endif %}" aria-hidden="true"></i>
-                            
-                        </span>
-                        <span><strong>( {{ rating.rating }}/5 )</strong></span>
-                        <p>{{ rating.review }}</p>
-                        {% if user.is_authenticated and rating.author == user %}
-                        <button class="btn btn-secondary rating-delete" rating_id="{{rating.id}}">Delete</button>
-                        {% endif %}
-                    </div>
-                    {% endfor %}
                 </div>
+                {% endfor %}
             </div>
         </div>
     </div>

@@ -97,10 +97,12 @@
                                                         href="{% url 'products' %}?category={{ product.category }}"><i
                                                             class="fa-solid fa-tag"></i>{{ product.category }}</small></a>
                                                 {% endif %}
+                                            </div>
+                                            <div class="text-left ml-3 mt-3">
                                                 {% if request.user.is_superuser %}
-                                                <small class="ml-3">
-                                                    <a href="{% url 'edit_product' product.id %}">Edit</a> |
-                                                    <button class="btn product-delete" product_id="{{ product.id}}"
+                                                <small class="text-left text-muted mb-2">
+                                                    <button class="btn"><a href="{% url 'edit_product' product.id %}">Edit</a></button></small>
+                                                <small class="text-left text-muted mb-2"><button class="btn product-delete" product_id="{{ product.id}}"
                                                         type="button">Delete</button>
                                                 </small>
                                                 {% endif %}

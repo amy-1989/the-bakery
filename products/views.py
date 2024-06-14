@@ -160,7 +160,7 @@ def edit_product(request, product_id):
         form = ProductForm(request.POST, request.FILES, instance=product)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Successfully updated product!')
+            messages.success(request, f'Successfully updated {product.name}!')
             return redirect(reverse('product_detail', args=[product.id]))
         else:
             messages.error(request, 'Failed to update product. Please ensure the form is valid.')
@@ -186,6 +186,7 @@ def delete_product(request, product_id):
         return redirect(reverse('home'))
     
     product = get_object_or_404(Product, pk=product_id)
+    
     product.delete()
     messages.success(request, 'Product deleted!')
     return redirect(reverse('products'))
@@ -212,8 +213,8 @@ def comment_delete(request, product_id, comment_id):
     """
     view to delete comment
     """
-    product = get_object_or_404(Product, product_id=product_id)
-    comment = get_object_or_404(Comment, comment_id=comment_id)
+
+    comment = get_object_or_404(Comment, pk=comment_id)
 
     if comment.author == request.user:
         comment.delete()
@@ -231,8 +232,8 @@ def reply_delete(request, product_id, reply_id):
     """
     view to delete a reply
     """
-    product = get_object_or_404(Product, product_id=product_id)
-    reply = get_object_or_404(Comment, reply_id=reply_id)
+
+    reply = get_object_or_404(Comment, pk=reply_id)
 
     if reply.author == request.user:
         reply.delete()

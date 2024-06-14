@@ -1,48 +1,52 @@
 {% load crispy_forms_tags %}
 
-<div class="row">
-    <div class="col d-flex justify-content-center">
-        <div class="card w-75 shadow p-3 bg-white rounded">
-            <div class="row">
-                <div class="col-md-6">
-                    <h3>Comments:</h3>
-                    {% if user.is_authenticated %}
-                    <h3>Add a Comment:</h3>
-                    <form id="commentForm" method="post" style="margin-top: 1.3em;">
-                        {{ comment_form | crispy }}
-                        {% csrf_token %}
-                        <p>By: {{ user.username }} </p>
-                        <button id="submitCommentButton" type="submit" class="btn btn-secondary">Add Comment</button>
-                    </form>
-                    {% else %}
-                    <p>Log in to leave a comment!</p>
+<div class="col d-flex justify-content-center">
+    <div class="card w-75 shadow p-3 bg-white rounded">
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Comments:</h3>
+                <hr/>
+                {% if user.is_authenticated %}
+                <p>Add a Comment:</p>
+                <form id="commentForm" method="post" style="margin-top: 1.3em;">
+                    {{ comment_form | crispy }}
+                    {% csrf_token %}
+                    <p>By: {{ user.username }} </p>
+                    <button id="submitCommentButton" type="submit" class="btn btn-secondary">Add Comment</button>
+                </form>
+                {% else %}
+                <p>Log in to leave a comment!</p>
+                {% endif %}
+                <!--Display Comments-->
+                {% for comment in comments %}
+                <hr/>
+                <div>
+                    <small>
+                        <p>{{ comment.author }} says:</p>
+                    </small>
+                    <p>{{ comment.body }}</p>
+                    {% if user.is_authenticated and comment.author == user %}
+                    <button class="btn btn-secondary comment-delete" comment_id="{{comment.id}}">Delete</button>
                     {% endif %}
-                    <!--Display Comments-->
-                    {% for comment in comments %}
-                    <div>
-                        <small><p>{{ comment.author }} says:</p></small>  
-                        <p>{{ comment.body }}</p>
-                        {% if user.is_authenticated and comment.author == user %}
-                        <button class="btn btn-secondary comment-delete" comment_id="{{comment.id}}">Delete</button>
-                        {% endif %}
-                        {% include 'products/add_reply_form.html' %}
-                    </div>                       
-                    <!--Display Replies to Comments-->
-                    {% for reply in comment.replies.all %}
-                    <div class="p-4 pt-1">
-                        <small><p> {{ reply.author }} says: </small></p>
-                        <div id="reply{{ reply.id }}">
-                        {{ reply.body | linebreaks }}
-                        </div>
-                        <hr />
-                        <!--Reply Delete Buttons-->
-                        {% if user.is_authenticated and reply.author == user %}
-                        <button class="btn btn-reply-delete btn-secondary" reply_id="{{ reply.id }}">Delete</button>
-                        {% endif %}
-                    </div> 
-                    {% endfor %}     
-                    {% endfor %}
+                    {% include 'products/add_reply_form.html' %}
                 </div>
+                <!--Display Replies to Comments-->
+                {% for reply in comment.replies.all %}
+                <div class="p-4 pt-1">
+                    <small>
+                        <p> {{ reply.author }} says:
+                    </small></p>
+                    <div id="reply{{ reply.id }}">
+                        {{ reply.body | linebreaks }}
+                    </div>
+                    <hr />
+                    <!--Reply Delete Buttons-->
+                    {% if user.is_authenticated and reply.author == user %}
+                    <button class="btn btn-reply-delete btn-secondary" reply_id="{{ reply.id }}">Delete</button>
+                    {% endif %}
+                </div>
+                {% endfor %}
+                {% endfor %}
             </div>
         </div>
     </div>
