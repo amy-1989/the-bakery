@@ -7,6 +7,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>The Bakery</title>
+    <meta name="description" content="Dublin bakery website selling artisan baked cakes & cupcakes">
+    <meta name="keywords"
+        content="bakery, Dublin, cakes, cupcakes, apple tarts, sponges, birthday cake, 
+                                sweet treats, celebration cake, drizzle cake, artisan, home-made cakes, desserts, pastry">
 
     <!-- Bootstrap CSS-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -172,11 +176,14 @@
             justify-content-center">
                 <!--social links-->
                 <ul class="p-0">
-                    <li class="d-inline p-2 socialLinks"><a href="#"><i class="fa-brands fa-square-facebook"></i></a>
+                    <li class="d-inline p-2 socialLinks"><a href="https://www.facebook.com/" target="_blank"
+                            rel="noopener"><i class="fa-brands fa-square-facebook"></i></a>
                     </li>
-                    <li class="d-inline p-2 socialLinks"><a href="#"><i class="fa-brands fa-square-x-twitter"></i></a>
+                    <li class="d-inline p-2 socialLinks"><a href="https://x.com/?lang=en" target="_blank"
+                            rel="noopener"><i class="fa-brands fa-square-x-twitter"></i></a>
                     </li>
-                    <li class="d-inline p-2 socialLinks"><a href="#"><i class="fa-brands fa-square-instagram"></i></a>
+                    <li class="d-inline p-2 socialLinks"><a href="https://www.instagram.com/" target="_blank"
+                            rel="noopener"><i class="fa-brands fa-square-instagram"></i></a>
                     </li>
                 </ul>
             </div>
@@ -185,7 +192,7 @@
             justify-content-center">
                 <!--other links-->
                 <ul class="p-0">
-                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="{% url 'about' %}">Contact Us</a></li>
                     <li><a href="#">FAQ</a></li>
                     <li><a href="#">Privacy Policy</a></li>
                     <li><a href="#">Terms & Conditions</a></li>
