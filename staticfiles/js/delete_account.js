@@ -18,7 +18,7 @@ for (let button of deleteAccountButtons) {
         let accountId = button.getAttribute("user_id");
         console.log(accountId);
         document.getElementById("deleteModalLabel").innerHTML = "Delete Account?";
-        document.getElementById("modalBodyContent").innerHTML = "Are you sure you want to delete your account? This action cannot be undone."
+        document.getElementById("modalBodyContent").innerHTML = "Are you sure you want to delete your account? This action cannot be undone.";
         deleteAccountConfirm.href = `account/delete/${accountId}`;
         deleteAccountModal.show();
     });

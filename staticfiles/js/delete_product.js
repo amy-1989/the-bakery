@@ -17,7 +17,7 @@ for (let button of deleteProductButtons) {
     button.addEventListener("click", (e) => {
         let productId = button.getAttribute("product_id");
         document.getElementById("deleteModalLabel").innerHTML = "Delete Product?";
-        document.getElementById("modalBodyContent").innerHTML = "Are you sure you want to delete this product? This action cannot be undone."
+        document.getElementById("modalBodyContent").innerHTML = "Are you sure you want to delete this product? This action cannot be undone.";
         deleteProductConfirm.href = `delete_product/${productId}`;
         deleteProductModal.show();
     });

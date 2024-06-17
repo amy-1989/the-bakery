@@ -17,7 +17,7 @@ for (let button of deleteAddressButtons) {
   button.addEventListener("click", (e) => {
     let addressId = button.getAttribute("address_id");
     document.getElementById("deleteModalLabel").innerHTML = "Delete Address?";
-    document.getElementById("modalBodyContent").innerHTML = "Are you sure you want to delete your address? This action cannot be undone."
+    document.getElementById("modalBodyContent").innerHTML = "Are you sure you want to delete your address? This action cannot be undone.";
     deleteAddressConfirm.href = `address/delete/${addressId}`;
     deleteAddressModal.show();
   });

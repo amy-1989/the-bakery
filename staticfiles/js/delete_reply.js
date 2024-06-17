@@ -17,7 +17,7 @@ for (let button of deleteReplyButtons) {
     button.addEventListener("click", (e) => {
         let replyId = button.getAttribute("reply_id");
         document.getElementById("deleteModalLabel").innerHTML = "Delete Reply?";
-        document.getElementById("modalBodyContent").innerHTML = "Are you sure you want to delete this reply? This action cannot be undone."
+        document.getElementById("modalBodyContent").innerHTML = "Are you sure you want to delete this reply? This action cannot be undone.";
         deleteReplyConfirm.href = `delete_reply/${replyId}`;
         deleteReplyModal.show();
     });

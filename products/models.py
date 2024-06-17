@@ -11,6 +11,7 @@ RATING = (
     (5, "⭐⭐⭐⭐⭐"),
     )
 
+
 class Category(models.Model):
     name = models.CharField(max_length=100)
 
@@ -19,11 +20,13 @@ class Category(models.Model):
 
 
 class Product(models.Model):
-    category = models.ForeignKey('Category', null=True, blank=True, on_delete=models.SET_NULL)
+    category = models.ForeignKey('Category', null=True, blank=True,
+                                 on_delete=models.SET_NULL)
     sku = models.CharField(max_length=250, null=True, blank=True)
     name = models.CharField(max_length=250)
     description = models.TextField()
-    image = CloudinaryField('image', default='placeholder', null=True, blank=True)
+    image = CloudinaryField('image', default='placeholder',
+                            null=True, blank=True)
     price = models.DecimalField(max_digits=6, decimal_places=2)
 
     def __str__(self):
@@ -31,11 +34,13 @@ class Product(models.Model):
 
 
 class Rating(models.Model):
-    rated_product=models.ForeignKey(
+    rated_product = models.ForeignKey(
         Product, on_delete=models.CASCADE, related_name="ratings")
-    author=models.ForeignKey(
-        User, on_delete=models.CASCADE, null=True, related_name="rating_author")
-    rating = models.IntegerField(choices=RATING, default=None, null=True, blank=False) 
+    author = models.ForeignKey(
+        User, on_delete=models.CASCADE, null=True,
+        related_name="rating_author")
+    rating = models.IntegerField(choices=RATING, default=None,
+                                 null=True, blank=False)
     review = models.CharField(max_length=100, null=True, blank=True)
 
     def __str__(self):
@@ -43,22 +48,18 @@ class Rating(models.Model):
 
 
 class Comment(models.Model):
-    product=models.ForeignKey(
+    product = models.ForeignKey(
         Product, on_delete=models.CASCADE, related_name="comments")
-    author=models.ForeignKey(
+    author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="commenter")
-    body=models.TextField()
-    parent=models.ForeignKey(
+    body = models.TextField()
+    parent = models.ForeignKey(
         "self", null=True, blank=True, on_delete=models.CASCADE,
         related_name="replies")
-    created_on=models.DateTimeField(auto_now_add=True)
+    created_on = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering=["created_on"]
+        ordering = ["created_on"]
 
     def __str__(self):
         return f"Comment: {self.body} by {self.author}"
-    
-
-
-

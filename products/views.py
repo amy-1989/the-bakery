@@ -8,6 +8,7 @@ from django.http import HttpResponseRedirect
 from .models import Product, Category, Rating, Comment
 from .forms import ProductForm, RatingForm, CommentForm
 
+
 def products(request):
     """ View to display all products, including searching and filtering"""
 
@@ -16,7 +17,6 @@ def products(request):
     categories = None
     sort = None
     direction = None
-
 
     if request.GET:
         if 'sort' in request.GET:
@@ -42,10 +42,12 @@ def products(request):
         if 'q' in request.GET:
             query = request.GET['q']
             if not query:
-                messages.error(request, "You didn't enter any search criteria!")
+                messages.error(request, "You didn't enter\
+                               any search criteria!")
                 return redirect(reverse('products'))
-            
-            queries = Q(name__icontains=query) | Q(description__icontains=query)
+
+            queries = Q(
+                name__icontains=query) | Q(description__icontains=query)
             products = products.filter(queries)
 
     current_sorting = f'{sort}_{direction}'
@@ -67,7 +69,8 @@ def product_detail(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
     ratings = product.ratings.all()
     average_rating = ratings.aggregate(avg=Avg('rating'))
-    comments = product.comments.filter(parent__isnull=True).order_by("created_on")
+    comments = product.comments.filter(
+        parent__isnull=True).order_by("created_on")
 
     if request.method == "POST":
 
@@ -78,10 +81,11 @@ def product_detail(request, product_id):
             rating.author = request.user
             rating.rated_product = product
             rating.save()
-            return HttpResponseRedirect(reverse('product_detail', args=[product_id]))
+            return HttpResponseRedirect(
+                reverse('product_detail', args=[product_id]))
         else:
             rating_form = RatingForm()
-        
+
         comment_form = CommentForm(data=request.POST)
 
         if comment_form.is_valid():
@@ -100,13 +104,14 @@ def product_detail(request, product_id):
             comment.author = request.user
             comment.product = product
             comment.save()
-            return HttpResponseRedirect(reverse('product_detail', args=[product_id]))
+            return HttpResponseRedirect(
+                reverse('product_detail', args=[product_id]))
         else:
             comment_form = CommentForm()
     else:
         comment_form = CommentForm()
         rating_form = RatingForm()
- 
+
     context = {
         'product': product,
         'rating_form': rating_form,
@@ -134,10 +139,11 @@ def add_product(request):
             messages.success(request, 'Successfully added product!')
             return redirect(reverse('add_product'))
         else:
-            messages.error(request, 'Failed to add product. Please ensure the form is valid.')
+            messages.error(request, 'Failed to add product.\
+                           Please ensure the form is valid.')
     else:
         form = ProductForm()
-        
+
     template = 'products/add_product.html'
     context = {
         'form': form,
@@ -163,7 +169,8 @@ def edit_product(request, product_id):
             messages.success(request, f'Successfully updated {product.name}!')
             return redirect(reverse('product_detail', args=[product.id]))
         else:
-            messages.error(request, 'Failed to update product. Please ensure the form is valid.')
+            messages.error(request, 'Failed to update product.\
+                           Please ensure the form is valid.')
     else:
         form = ProductForm(instance=product)
         messages.info(request, f'You are editing {product.name}')
@@ -184,9 +191,9 @@ def delete_product(request, product_id, pk):
     if not request.user.is_superuser:
         messages.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
-    
+
     product = get_object_or_404(Product, pk=product_id)
-    
+
     product.delete()
     messages.success(request, 'Product deleted!')
     return redirect(reverse('home'))
@@ -200,10 +207,12 @@ def delete_rating(request, rated_product_id, id):
 
     if request.user == rating.author:
         rating.delete()
-        messages.success(request, 'Product rating deleted!')
+        messages.success(request,
+                         'Product rating deleted!')
     else:
-        messages.ERROR(request, 'You can only delete your own product ratings!')
-        
+        messages.ERROR(request,
+                       'You can only delete your own product ratings!')
+
     product_detail_url = reverse('product_detail', args=[rated_product_id])
     return HttpResponseRedirect(product_detail_url)
 
@@ -221,7 +230,7 @@ def comment_delete(request, product_id, comment_id):
         messages.success(request, 'Comment deleted!')
     else:
         messages.error(request, 'You can only delete your own comments!')
-    
+
     product_detail_url = reverse('product_detail', args=[product_id])
 
     return HttpResponseRedirect(product_detail_url)
@@ -240,7 +249,7 @@ def reply_delete(request, product_id, reply_id):
         messages.success(request, 'Reply deleted!')
     else:
         messages.error(request,
-                             'You can only delete your own replies!')
+                       'You can only delete your own replies!')
 
     product_detail_url = reverse('product_detail', args=[product_id])
 

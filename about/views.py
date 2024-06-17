@@ -13,7 +13,8 @@ def about_page(request):
         if contact_form.is_valid():
             contact_form.save()
             messages.success(request, 
-                "Message received! We will respond as soon as possible!")
+                            "Message received! \
+                            We will respond as soon as possible!")
 
     about = About.objects.all().order_by('-updated_on').first()
     contact_form = AboutContactForm()

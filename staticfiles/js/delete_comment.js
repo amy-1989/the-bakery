@@ -17,7 +17,7 @@ for (let button of deleteCommentButtons) {
     button.addEventListener("click", (e) => {
         let commentId = button.getAttribute("comment_id");
         document.getElementById("deleteModalLabel").innerHTML = "Delete Comment?";
-        document.getElementById("modalBodyContent").innerHTML = "Are you sure you want to delete this comment? This action cannot be undone."
+        document.getElementById("modalBodyContent").innerHTML = "Are you sure you want to delete this comment? This action cannot be undone.";
         deleteCommentConfirm.href = `delete_comment/${commentId}`;
         deleteCommentModal.show();
     });
