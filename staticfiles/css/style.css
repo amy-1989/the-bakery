@@ -89,28 +89,36 @@ a:hover {
     text-decoration: underline;
 }
 
+/* MailChimp */
+#mc_embed_signup {
+    background: #fff;
+    clear: left;
+    font: 14px Helvetica, Arial, sans-serif;
+    width: 400px;
+}
 
+/* Stripe */
 .StripeElement,
 .stripe-style-input {
-  box-sizing: border-box;
-  height: 40px;
-  padding: 10px 12px;
-  border: 1px solid black;
-  border-radius: 0px;
-  background-color: white;
-  box-shadow: 0 1px 3px 0 #e6ebf1;
-  -webkit-transition: box-shadow 150ms ease;
-  transition: box-shadow 150ms ease;
+    box-sizing: border-box;
+    height: 40px;
+    padding: 10px 12px;
+    border: 1px solid black;
+    border-radius: 0px;
+    background-color: white;
+    box-shadow: 0 1px 3px 0 #e6ebf1;
+    -webkit-transition: box-shadow 150ms ease;
+    transition: box-shadow 150ms ease;
 }
 
 .StripeElement--focus,
 .stripe-style-input:focus,
 .stripe-style-input:active {
-  box-shadow: 0 1px 3px 0 #cfd7df;
+    box-shadow: 0 1px 3px 0 #cfd7df;
 }
 
 .StripeElement--webkit-autofill {
-  background-color: #fefde5 !important;
+    background-color: #fefde5 !important;
 }
 
 .stripe-style-input::placeholder {
@@ -127,9 +135,10 @@ a:hover {
     color: #000;
     border: 1px solid #000;
 }
+
 #loading-overlay {
-	display: none;
-	position: fixed;
+    display: none;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -139,7 +148,7 @@ a:hover {
 }
 
 .loading-spinner {
-	display: flex;
+    display: flex;
     align-items: center;
     justify-content: center;
     margin: 0;
@@ -153,11 +162,11 @@ a:hover {
 label {
     margin-top: .7rem;
     margin-left: 2rem;
-    
+
 }
 
 .form-check-input[type=checkbox] {
-     border-radius: 0 !important;  
+    border-radius: 0 !important;
 }
 
 .form-check .form-check-input {
@@ -176,7 +185,7 @@ label {
 }
 
 @media only screen and (max-width: 768px) {
-    .navbar-brand { 
+    .navbar-brand {
         margin-right: 0 !important;
     }
 
@@ -192,4 +201,3 @@ label {
         margin-left: 0 !important;
     }
 }
-
