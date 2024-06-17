@@ -67,8 +67,8 @@
                                 </a>
                                 {% else %}
                                 <a href="{% url 'product_detail' product.id %}">
-                                    <img class="card-img-top img-fluid"
-                                        src="{% static 'no_image.webp' %}" alt="{{ product.name }}">
+                                    <img class="card-img-top img-fluid" src="{% static 'no_image.webp' %}"
+                                        alt="{{ product.name }}">
                                 </a>
                                 {% endif %}
                                 <div class="card-body pb-0 mb-3">
@@ -84,27 +84,10 @@
                                             </div>
                                             <hr>
                                             <div class="text-left ml-3 mt-3">
-                                                {% if product.rating %}
-                                                <small class="text-left text-muted mb-2"><i
-                                                        class="fas fa-star mr-1"></i>{{ product.rating }} / 5</small>
-                                                {% else %}
-                                                <small class="text-left text-muted mb-2">No Rating</small>
-                                                {% endif %}
-                                            </div>
-                                            <div class="text-left ml-3 mt-3">
                                                 {% if product.category %}
                                                 <small class="text-left text-muted mb-2"><a
                                                         href="{% url 'products' %}?category={{ product.category }}"><i
                                                             class="fa-solid fa-tag"></i>{{ product.category }}</small></a>
-                                                {% endif %}
-                                            </div>
-                                            <div class="text-left ml-3 mt-3">
-                                                {% if request.user.is_superuser %}
-                                                <small class="text-left text-muted mb-2">
-                                                    <button class="btn"><a href="{% url 'edit_product' product.id %}">Edit</a></button></small>
-                                                <small class="text-left text-muted mb-2"><button class="btn product-delete" product_id="{{ product.id}}"
-                                                        type="button">Delete</button>
-                                                </small>
                                                 {% endif %}
                                             </div>
                                         </div>
