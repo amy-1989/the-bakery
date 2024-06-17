@@ -152,11 +152,12 @@ def checkout_success(request, order_number):
 
     order = get_object_or_404(Order, order_number=order_number)
 
-    profile = UserProfile.objects.get(user=request.user)
+    if request.user.is_authenticated:
 
-    # Attach the user's profile to the order
-    order.user_profile = profile
-    order.save()
+        profile = UserProfile.objects.get(user=request.user)
+        # Attach the user's profile to the order
+        order.user_profile = profile
+        order.save()
 
     messages.success(request, f'Order successfully processed! \
         Your order number is {order_number}. A confirmation \
@@ -168,7 +169,6 @@ def checkout_success(request, order_number):
     template = 'checkout/checkout_success.html'
     context = {
         'order': order,
-        'profile': profile,
     }
 
     return render(request, template, context)
