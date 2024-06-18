@@ -30,7 +30,7 @@
   - [Checkout Page](#checkout-page)
   - [Checkout Success Page](#checkout-success-page)
   - [Delete Modal](#delete-modal)
-  
+- [Bugs](#bugs)
 
 ## User Story Testing
 
@@ -169,10 +169,9 @@ The deployed site was tested on multiple browsers to confirm that everything is 
 
 ### Lighthouse
 
-The site was tested for performance and accessibility using Lighthouse on Chrome Developer Tools.
+The site was tested for performance and accessibility using Lighthouse on Chrome Developer Tools. It is noted that carousel images are hindering performance.
 
-
-<img src="">
+<img src="./documents/images/validation/lighthouse.webp">
 
 ## Manual Testing
 
@@ -437,3 +436,6 @@ PASS   |
 | Close Button  | Click  | Closes the modal box, no delete takes place | PASS   |   |
 | Delete Button | Click  | Chosen Item is deleted                      | PASS   |   |
 
+## Bugs
+
+- There is an unresolved bug where product images do not render to the ahopping bag page and the placeholder image renders instead.

@@ -209,7 +209,7 @@ Epic 8: Documentation
 
 ## Testing
 
-Due to the large size of the testing section, I created a separate file to store all the tests and results. It can be found here [TESTING.md]()
+Due to the large size of the testing section, I created a separate file to store all the tests and results. It can be found here [TESTING.md](https://github.com/amy-1989/the-bakery/blob/main/TESTING.md)
 
 ## Deployment
 
@@ -276,7 +276,7 @@ Deployment steps:
 
 ### Content
 
-Product content was provided by Rob & Steves Confectioners Ltd.
+- Product content was provided by Rob & Steves Confectioners Ltd.
 
 ### Code
 
