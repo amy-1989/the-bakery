@@ -91,13 +91,15 @@ Site User:
 ![Checkout Page](./documents/images/design/checkout_page.PNG)
 
 ### Fonts
+Roboto from Google Fonts was chosen as the predominant font throughout the site for its clean lines and clarity. It is very easy to read and accessible.
 
 ### Colour Scheme
+The colours of blue, pink, white and greys was chosen to match in with the business logo. White was chosen as the predominant background colour to let the products stand out for themselves, and not have to compete with a strong background hue. 
 
 ## Development
 
 ### Agile Methodology
-This project was developed using the Agile methodology. All epics and user stories progress was tracked through Github projects Kanban Board.
+This project was developed using the Agile methodology. All epics and user stories progress was tracked through Github projects ![Kanban Board](./documents/images/other/kanban-board.webp).
 
 #### Epics(Milestones)
 
@@ -287,7 +289,6 @@ Deployment steps:
 ### Acknowledgements
 
 - Thank you, as always, to my mentor Narender Singh for his guidance and patience in developing this project.
-- Thank you to Marko from CI for answering my numerous queries.
 - Thank you to tutor support for all their help on getting this project functional.
 - Thank you to all those on slack who answered my questions at various stages of development.
 - Thank you to my family and friends for their extensive testing of the finished site.
