@@ -1,6 +1,6 @@
 # The Bakery
 
-[The Bakery](https://the-bakery-7e15a3228766.herokuapp.com/)is a fictional B2C ecommerce website that specializes in selling homemade baked goods to online consumers.
+[The Bakery](https://the-bakery-7e15a3228766.herokuapp.com/) is a fictional B2C ecommerce website that specializes in selling homemade baked goods to online consumers.
 
 ![Responsive Image](./documents/images/validation/responsive-screenshot.webp)
 
@@ -36,6 +36,8 @@
   - [Acknowledgements](#acknowledgements)
 
 ## Business Ecommerce Model
+
+The marketing strateing and seo techniques are documented in a separate file for organisation. It can be found here. ![MARKETING.md](https://github.com/amy-1989/the-bakery/blob/main/MARKETING.md)
 
 ## User Experience
 
@@ -197,17 +199,62 @@ Epic 8: Documentation
 ## Features
 
 ### Flow of the Website
+The site was designed with the user in mind, and to intuitively guide them from product browsing to actual purchase. The home page greets the users with a carousel of product images complete with links to the products page.
+
+<img src="./documents/images/other/home-page.webp">
+
+The navbar contains links to products, accounts, the shopping bag and an about page.
+
+<img src="./documents/images/other/about-page.webp">
+
+In the products dropdown menu, users can choose to view all the products or by category. The products are displayed on individual cards containing an image, price and button to see more information about the item.
+
+<img src="./documents/images/other/products-pages.webp">
+
+Users will then be brought to the product detail page which contains description, price, reviews, ratings, comments and an option to purchase, or return to browsing.
+
+<img src="./documents/images/other/product-detail.webp">
+
+Upon adding an item to the shopping bag users can checkout by navigating to the shopping bag which will let users see an itemised list of what they have chosen so far.
+
+<img src="./documents/images/other/bag.webp">
+
+Users can then decide to continue shopping, to remove items from the bag or to proceed to a secure checkout. Users can fill out the checkout form and card information to complete their orders. Authenticated users with a primary address in their profile will find the checkout form already prepopulated for them.
+
+<img src="./documents/images/other/checkout.webp">
+
+Upon a successful checkout, users will be shown a checkout success page containing their order details and a confirmation email will also be sent. Authenticated users can revisit this order page through their user profiles.
 
 ### Create Account
+Users have the ability to create their own accounts if they wish. By creating an account, a user profile is automatically created. Users with accounts can comment on products and provide product ratings and reviews.
+
+<img src="./documents/images/other/create-account.webp">
 
 ### User Profiles
+Users who have created accounts are automatically provided with user profiles. Here users can save multiple delivery addresses and view previous orders. Users can view their saved addresses and change which one is their primary one to be populated on the checkout form for future purchases. 
+Users can also provide feedback about previous orders by filling out the feedback form on the order history card.
+
+<img src="./documents/images/other/profile-page.webp">
+
+<img src="./documents/images/other/address-page.webp">
 
 ### Social Interactions
+Authenticated users can comment on products in the product detail page. They can also reply to other users comments. Replies to comments are designed to appear indented under the parent comment, to allow users to easily follow a conversation among users in the comments section.
+
+Authenticated Users can also review products and give a star rating on the product detail page also. These star ratings are then gathered to provide an average rating displayed in the product detail card.
+
+<img src="./documents/images/other/comment-review.webp">
 
 ### CRUD
 
+Their is extensive CRUD functionality designed throughout the site. Site Owners can edit and delete their products. Users can also delete their own comments and/or replies to other comments if they so wish. They can delete their ratings and reviews. Users can delete their accounts if they wish. They can also edit or delete their saved addresses. 
+
+
 ### Product Management
 
+Site Owners, once authenticated, can manage their products via a form on the front-end. They can edit products or delete them entirely. They can click the product management link to add new products to the site.
+
+<img src="./documents/images/other/product-management.webp">
 
 ## Testing
 
