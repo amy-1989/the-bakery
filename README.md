@@ -37,7 +37,7 @@
 
 ## Business Ecommerce Model
 
-The marketing strateing and seo techniques are documented in a separate file for organisation. It can be found here. ![MARKETING.md](https://github.com/amy-1989/the-bakery/blob/main/MARKETING.md)
+The marketing strateing and seo techniques are documented in a separate file for organisation. It can be found here. [MARKETING.md](https://github.com/amy-1989/the-bakery/blob/main/MARKETING.md)
 
 ## User Experience
 

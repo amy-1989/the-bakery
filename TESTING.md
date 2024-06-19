@@ -171,7 +171,7 @@ The deployed site was tested on multiple browsers to confirm that everything is 
 
 The site was tested for performance and accessibility using Lighthouse on Chrome Developer Tools. It is noted that carousel images are hindering performance.
 
-<img src="./documents/images/validation/lighthouse.webp">
+<img src="./documents/images/validation/lighthouse-test.webp">
 
 ## Manual Testing
 
